@@ -1,0 +1,132 @@
+#work > .header {
+  text-align: center;
+  font-size: 4rem;
+  color: var(--font-color-2);
+}
+
+#work > .description {
+  text-align: center;
+  color: var(--font-color);
+  width: 100%;
+  position: relative;
+  display: block;
+  padding: 2em;
+  font-size: 1.5em;
+}
+
+#work > .screenshots {
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: center; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 2em;
+  position: relative;
+}
+
+#work > .screenshots > span {
+  position: relative;
+  display: block;
+  margin: 0 0 3.5em;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+#work > .screenshots > span > picture > img {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: block;
+  object-fit: cover;
+}
+
+#work > .screenshots > span::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: var(--bg-color-3);
+  opacity: .8;
+  position: absolute;
+  display: block;
+  transform: scale(2) translateX(-75%) translateY(-75%) rotate(-28deg);
+  transition: transform 2s cubic-bezier(.2,1,.3,1);
+}
+
+#work > .screenshots > span:hover::after {
+  transform: scale(2) translateX(0) translateY(0) rotate(-28deg);
+}
+
+#work > .screenshots > span > .info {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  text-align: center;
+  transform: translateY(-15%);
+  opacity: 0;
+  z-index: 1;
+  transition: opacity .5s cubic-bezier(.2,1,.3,1),transform .5s cubic-bezier(.2,1,.3,1);
+}
+
+#work > .screenshots > span:hover > .info { 
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#work > .screenshots > span > .info > span {
+  font-size: 1.5em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#work > .screenshots > span > .info > span > p {
+  background: var(--bg-color-2);
+  padding: 10px;
+  position: relative;
+  display: block;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+#work > .screenshots > .more {
+  display: grid;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  width: 100%;
+  height: calc(100% - 3.5em);
+  justify-content: center;
+  align-items: center;
+}
+
+#work > .screenshots > .more > span {
+  color: var(--font-color);
+  line-height: 1.1em;
+  cursor: pointer;
+}
+
+#work > .screenshots > .more > span > i {
+  color: var(--bg-color-3)
+}
+
+/* to desktop */
+@media (min-width: 768px) { 
+  #work > .screenshots {
+    width: 70%;
+    margin: 0 auto;
+  }
+}

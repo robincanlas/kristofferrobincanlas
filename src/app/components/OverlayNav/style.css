@@ -1,0 +1,69 @@
+#overlay {
+  position: fixed;
+  background-color: var(--background-color);
+  background-image: var(--background-image);
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s linear 500ms, opacity 500ms ease-in-out;
+}
+
+#overlay.open {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 500ms ease-in-out;
+}
+
+#overlay > .bg {
+  display: grid;
+  grid-template-rows: 10% 90%;
+  background: var(--bg-color);
+  height: 100%;
+  opacity: .8;
+}
+
+#overlay > .bg > span:nth-child(1) {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.5em 2em;
+}
+
+#overlay > .bg > span:nth-child(2) { 
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-transform: uppercase;
+  text-align: center;  
+}
+
+#overlay > .bg > span:nth-child(2) > h1 {
+  color: var(--font-color);
+  text-transform: uppercase;
+}
+
+#overlay > .bg > span:nth-child(2) > h1.active {
+  color: var(--bg-color-3);
+}
+
+
+#overlay > .bg > span > .xicon > div {
+  height: 5px;
+  width: 50px;
+  background-color: var(--font-color);
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+#overlay > .bg > span > .xicon > div:nth-child(1) {
+  transform: rotate(45deg) translate(10px, 10px);
+}
+
+#overlay > .bg > span > .xicon > div:nth-child(2) {
+  transform: rotate(-45deg);
+}

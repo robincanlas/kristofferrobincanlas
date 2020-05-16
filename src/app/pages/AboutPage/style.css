@@ -1,0 +1,82 @@
+#container {
+  display: grid;
+  align-items: center;
+  margin-left: 0!important;
+  margin-right: 0!important;
+}
+
+#container > .message {
+  background: transparent;
+  box-shadow: none;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#container > .message > span > h2 {
+  font-size: 4rem;
+}
+
+#container > .message > p {
+  font-size: 1.5rem;
+}
+
+#container > .message, 
+#container > .message > span > h2, 
+#container > .segment > h1  {
+  color: var(--font-color);
+}
+
+#container > .segment {
+  background: var(--bg-color-2);
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  display: block;
+  border-radius: .2rem;
+  padding: 3em 0;
+}
+
+#container > .segment > .title {
+  text-align: center;
+  position: relative;
+  display: block;
+  font-size: 3em;
+  color: var(--font-color);
+}
+
+#container > .segment > span {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+#container > .segment > span > span {
+  width: 110px;
+}
+
+#container > .segment > span > span > svg {
+  height: 120px;
+  width: 120px;
+  opacity: .8;
+  transform: scale(.6);
+  transform-origin: center;
+  transition: all 300ms ease-in-out;
+}
+
+#container > .segment > span > span > svg:hover {
+  transform: scale(.8);
+  opacity: 1;
+}
+
+/* to desktop */
+@media (min-width: 768px) { 
+  #container {
+    margin-left: auto!important;
+    margin-right: auto!important;
+  }
+
+  #container > .message { 
+    width: 80%;
+  }
+}

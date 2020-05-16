@@ -1,0 +1,36 @@
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#container > .contact {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  grid-gap: 5px;
+}
+
+#container > .contact > div {
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--font-color-2);
+}
+
+#container > .contact > p {
+  font-size: 1.5em;
+}
+
+#container > .contact > .details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+#container > .contact > .details > span > i {
+  margin: 5px 0;
+}
+
+#container > .contact > .details > span > .text {
+  font-size: 1.3em;
+  padding: 8px;
+}

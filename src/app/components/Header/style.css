@@ -1,0 +1,111 @@
+#nav {
+  margin: 0 auto;
+  padding: 1.5em 2em;
+  height: 90px;
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  transition: all 400ms ease-in-out;
+}
+
+#nav.unpinned {
+  transform: translateY(-90px);
+}
+
+#nav > .bg {
+  background: var(--bg-color);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  box-shadow: 0 5px 30px rgba(0,0,0,.2);
+}
+
+#nav > .pattern {
+  background-color: var(--background-color);
+  background-image: var(--background-image);
+}
+
+#nav > .bg , #nav > .pattern {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+#nav > .bg.show-bg , #nav > .pattern.show-bg {
+  opacity: .8;
+}
+
+#nav > .bg.show-bg.photography {
+  opacity: 1;
+}
+
+#nav>.name {
+  padding: 0;
+  font-size: 2em;
+}
+
+#nav > .menu {
+  display: none;
+}
+
+#nav > .name, #nav > .menu > a {
+  color: var(--font-color);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 300ms ease-in-out;
+}
+
+#nav > .menu > a::after {
+  content: "";
+  background: var(--bg-color-3);
+  width: 15px;
+  height: 2px;
+  right: calc(0% + 7px);
+  position: absolute;
+  transform: translateY(-10px) scale(0);
+  transform-origin: center right;
+  transition: transform 500ms ease-in-out;
+}
+
+#nav > .menu > a:hover {
+  color: var(--bg-color-3);
+}
+
+#nav > .menu > a:hover::after {
+  transform: translateY(-10px) scale(1);
+}
+
+#nav > .name > .tag{
+  color: var(--bg-color-3);
+}
+
+#nav>.burger>div>div {
+  width: 35px;
+  height: 3px;
+  margin: 8px 0;
+  background-color: var(--font-color);
+}
+
+#nav>.burger>div:active {
+  background-color: var(--bg-color-2);
+}
+
+/* to desktop */
+@media (min-width: 768px) { 
+  #nav>.menu {
+    display: inherit;
+  }
+
+  #nav>.menu>.active {
+    color: var(--bg-color-3);
+  }
+  
+  #nav>.burger {
+    display: none;
+  }
+}

@@ -1,0 +1,94 @@
+#container {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+#container > .nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 1.5em;
+}
+
+#container > .nav > span:nth-child(1),
+#container > .nav > span:nth-child(3) {
+  display: flex;
+  font-size: 1.4em;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 300ms ease-in-out;
+}
+
+#container > .nav > span:nth-child(1):hover,
+#container > .nav > span:nth-child(3):hover {
+  color: var(--bg-color-3);
+}
+
+#container > .nav > span:nth-child(3) > i {
+  margin-left: .25rem;
+}
+
+#container > .nav > span:nth-child(1) {
+  text-align: left;
+}
+
+#container > .nav > span:nth-child(3) {
+  text-align: right;
+  justify-content: flex-end;
+}
+
+article > .image, article > .description {
+  margin-bottom: 3em;
+}
+
+article > .image > picture > img {
+  margin: 0 auto;
+  object-fit: cover;
+  object-position: center center;
+  width: 100%;
+  height: 450px;
+}
+
+#container > article > h1 {
+  text-transform: uppercase;
+  font-size: 3em;
+  font-weight: bolder;
+  color: var(--font-color-2);
+  text-align: center;
+  margin-bottom: .5em;
+}
+
+article > .description {  
+  color: var(--font-color);
+  font-size: 1.2em;
+  line-height: 1.7rem;
+}
+
+#container > .technologies {
+  background: var(--bg-color-2);
+  border-radius: 5px;
+  padding: 20px 0 0;
+}
+
+#container > .technologies > h2 {
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--font-color);
+}
+
+#container > .technologies > .list {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#container > .technologies > .list > span {
+  width: 110px;
+}
+
+#container > .technologies > .list > span > svg {
+  height: 120px;
+  width: 120px;
+  transform: scale(.5);
+}
