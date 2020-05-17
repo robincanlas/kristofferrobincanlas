@@ -143,12 +143,12 @@ module.exports = (env, option) => {
         },
         append: {
           head: `<script src="//cdn.polyfill.io/v3/polyfill.min.js"></script>`
-        },
-        meta: {
-          title: 'Kristoffer Robin Canlas',
-          description: package.description,
-          keywords: Array.isArray(package.keywords) ? package.keywords.join(',') : undefined
         }
+        // meta: {
+        //   title: 'Kristoffer Robin Canlas',
+        //   description: package.description,
+        //   keywords: Array.isArray(package.keywords) ? package.keywords.join(',') : undefined
+        // }
       })
     ],
     devServer: {

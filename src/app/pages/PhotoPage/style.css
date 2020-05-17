@@ -1,6 +1,6 @@
 .gallery-list {
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: .25rem;
 }
 
 .gallery-list > span > img {
