@@ -30,11 +30,13 @@
 
 #container > .nav > span:nth-child(1) {
   text-align: left;
+  align-items: center;
 }
 
 #container > .nav > span:nth-child(3) {
   text-align: right;
   justify-content: flex-end;
+  align-items: center;
 }
 
 article > .image, article > .description {
@@ -91,4 +93,31 @@ article > .description {
   height: 120px;
   width: 120px;
   transform: scale(.5);
+}
+
+#container > article > .buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#container > article > .buttons > a {
+  width: auto;
+  height: 50px;
+  background: var(--bg-color-2);
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  margin: 0 1em;
+  padding: 0 1em;
+  font-weight: bolder;
+  transition: all 300ms ease-in-out;
+}
+
+#container > article > .buttons > a:hover {
+  background: var(--bg-color-3);
+  color: var(--bg-color-2);
 }

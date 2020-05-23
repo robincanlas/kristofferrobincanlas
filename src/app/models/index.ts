@@ -33,6 +33,8 @@ export namespace Models {
 		sharp_img: string;
 		description: string;
 		technologies: string[];
+		code: string | null;
+		site: string | null;
 	}
 
 	export interface Description {

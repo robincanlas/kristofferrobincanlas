@@ -3,7 +3,7 @@ import * as style from './style.css';
 import { Menu } from 'semantic-ui-react';
 import { navs } from 'app/constants';
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, matchPath } from 'react-router-dom';
 import { History } from 'history';
 
 export namespace Header {
@@ -55,11 +55,21 @@ export const Header: React.FC<Header.Props> = (props: Header.Props) => {
 		};
 	}, []);
 
+	const isWorkDescriptionPage = !!matchPath(
+		history.location.pathname, 
+		'/work/:id'
+	);
+
+	const isPhotoPage = !!matchPath(
+		history.location.pathname, 
+		'/photography'
+	);
+
 	return (
 		<header>
 			<Menu id={style.nav} className={`${isScrollUp ? style.unpinned : ''}`} text>
 				<span className={`${style.pattern} ${top ? '' : style['show-bg']}`}></span>
-				<span className={`${style.bg} ${top ? '' : style['show-bg']} ${url === '/photography' ? style.photography : ''}`}></span>
+				<span className={`${style.bg} ${top ? '' : style['show-bg']} ${isWorkDescriptionPage || isPhotoPage ? style['lights-off'] : ''}`}></span>
 				<Menu.Item className={style.name} onClick={() => history.push('/')} header>
 					<span className={style.tag}>{openTag}</span>
 					<span>{name}</span>

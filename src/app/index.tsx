@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as style from './style.css';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory, matchPath } from 'react-router-dom';
 import { Header, Footer, OverlayNav } from 'app/components';
 import { 
 	HomePage, 
@@ -31,9 +31,19 @@ export const App: React.FC = () => {
 		});
 	}, [history]);
 
+	const isWorkDescriptionPage = !!matchPath(
+		history.location.pathname, 
+		'/work/:id'
+	);
+
+	const isPhotoPage = !!matchPath(
+		history.location.pathname, 
+		'/photography'
+	);
+
 	return (
 		<React.Fragment>
-			<span className={`${style.bg} ${history.location.pathname === '/photography' ? style.photography : ''}`}></span>
+			<span className={`${style.bg} ${isWorkDescriptionPage || isPhotoPage ? style['lights-off'] : ''}`}></span>
 				<OverlayNav overlayNav={overlayNav} toggleOverlay={() => setOverlayNav(!overlayNav)} />
 				<span className={style.content}>
 					<Header toggleOverLay={() => setOverlayNav(!overlayNav)} />

@@ -59,7 +59,7 @@ const DescriptionComponent: React.FC<DescriptionComponent.Props> = (props: Descr
 					<div id={style.container}>
 						<div className={style.nav}>
 							<span onClick={() => previousPage(props.description!.previous)}>
-								<Icon name='arrow alternate circle left outline' /> 
+								<Icon size='large' name='angle double left' /> 
 								{props.description!.previous ? 'Previous Project'	: 'Back to Work Page' }
 							</span>
 							<span className={style.spacer}></span>
@@ -67,7 +67,7 @@ const DescriptionComponent: React.FC<DescriptionComponent.Props> = (props: Descr
 								<span onClick={() => nextPage(props.description!.next)}>
 									<React.Fragment>
 										Next Project 
-										<Icon name='arrow alternate circle right outline' />
+										<Icon size='large' name='angle double right' />
 									</React.Fragment>
 								</span>
 							}
@@ -86,6 +86,19 @@ const DescriptionComponent: React.FC<DescriptionComponent.Props> = (props: Descr
 									/>
 								</picture>
 							</div>
+							{props.description.current.code && props.description.current.site ? 
+								<div className={style.buttons}>
+									<a href={props.description.current.site} target='_blank'>
+										<Icon size='large' name='eye' />
+										visit site
+									</a>
+									<a href={props.description.current.code} target='_blank'>
+										<Icon size='large' name='code' />
+										view code
+									</a>
+								</div> :
+								null
+							}
 							<Header as='h1' className={style.title}>
 								{props.description.current.name}
 							</Header>
