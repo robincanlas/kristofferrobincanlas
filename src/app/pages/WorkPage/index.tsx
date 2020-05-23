@@ -47,7 +47,8 @@ const WorkPage: React.FC<Work.Props> = (props: Work.Props) => {
 								<picture>
 									<Image 
 										sizes='(max-width: 800px) 100vw, 800px' 
-										srcSet={`${work.sm} 200w, ${work.md} 400w, ${work.lg} 800w, ${work.xl} 1200w`}
+										src={work.sharp_img}
+										// srcSet={`${work.sm} 200w, ${work.md} 400w, ${work.lg} 800w, ${work.xl} 1200w`}
 									/>
 								</picture>
 								<div className={style.info}>

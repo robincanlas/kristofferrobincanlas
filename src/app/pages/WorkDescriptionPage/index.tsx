@@ -77,11 +77,12 @@ const DescriptionComponent: React.FC<DescriptionComponent.Props> = (props: Descr
 								<picture>
 									<Image 
 										sizes='(max-width: 800px) 100vw, 800px' 
-										srcSet={`
-										${props.description.current.sm} 200w, 
-										${props.description.current.md} 400w, 
-										${props.description.current.lg} 800w, 
-										${props.description.current.xl} 1200w`}
+										src={props.description.current.sharp_img}
+										// srcSet={`
+										// ${props.description.current.sm} 200w, 
+										// ${props.description.current.md} 400w, 
+										// ${props.description.current.lg} 800w, 
+										// ${props.description.current.xl} 1200w`}
 									/>
 								</picture>
 							</div>

@@ -30,6 +30,7 @@ export namespace Models {
 		md: string;
 		lg: string;
 		xl: string;
+		sharp_img: string;
 		description: string;
 		technologies: string[];
 	}
