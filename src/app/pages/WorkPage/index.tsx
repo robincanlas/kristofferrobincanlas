@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as style from './style.css';
-import { Container, Header, Image, Icon } from 'semantic-ui-react';
+import { Container, Header, Icon } from 'semantic-ui-react';
 import { WorkActions } from 'app/store/work/actions';
 import { WorkState } from 'app/store/work/state';
 import { connect } from 'react-redux';
@@ -9,7 +9,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { useHistory } from 'react-router-dom';
 import { History } from 'history';
 import { Models } from 'app/models';
-import { Loader } from 'app/components';
+import { ProgressiveImage } from 'app/components';
 import { cloudinaryUrl, cloudinarySizes } from 'app/constants';
 
 export namespace Work {
@@ -34,9 +34,9 @@ const WorkPage: React.FC<Work.Props> = (props: Work.Props) => {
 
 	const render = (): JSX.Element => {
 		if (props.work.isLoading) {
-			return <Loader />;
+			// return <Loader />;
 		}
-
+		
 		return (
 			<Container id={style.work} fluid>
 				<React.Fragment>
@@ -45,13 +45,20 @@ const WorkPage: React.FC<Work.Props> = (props: Work.Props) => {
 					<span className={style.screenshots}>
 						{props.work.works.map((work, index) => (
 							<span key={work.id} onClick={() => redirect(work, index)}>
-								<picture>
-									<Image 
-										sizes='(max-width: 800px) 100vw, 800px' 
-										src={`${cloudinaryUrl}${cloudinarySizes.sharp_img}${work.url}`}
-										// srcSet={`${work.sm} 200w, ${work.md} 400w, ${work.lg} 800w, ${work.xl} 1200w`}
+								<div className={style['project-image']}>
+									<ProgressiveImage 
+										sizes='(max-width: 800px) 100vw, 800px'
+										preview={`${cloudinaryUrl}${cloudinarySizes.tiny}${work.url}`}
+										image={`${cloudinaryUrl}${cloudinarySizes.sharp_img}${work.url}`}
+										srcSet={`${cloudinaryUrl}${cloudinarySizes.sm}${work.url} 200w,
+											${cloudinaryUrl}${cloudinarySizes.md}${work.url} 400w,
+											${cloudinaryUrl}${cloudinarySizes.lg}${work.url} 800w,
+											${cloudinaryUrl}${cloudinarySizes.xl}${work.url} 1200w,
+											${cloudinaryUrl}${cloudinarySizes.xxl}${work.url} 1400w,
+											${cloudinaryUrl}${cloudinarySizes.xxxl}${work.url} 1600w,
+										`}
 									/>
-								</picture>
+								</div>
 								<div className={style.info}>
 									<span><p>{work.name}</p></span>
 								</div>

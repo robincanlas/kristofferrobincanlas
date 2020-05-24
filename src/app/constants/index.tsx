@@ -13,11 +13,14 @@ export const endPoint: Models.EndPoint = {
 
 export const cloudinaryUrl: string = 'https://res.cloudinary.com/speedforce/image/upload/';
 export const cloudinarySizes: Sizes = {
+	tiny: 'c_scale,h_40,w_70',
 	xs: 'c_scale,h_50,q_100,w_50',
-	sm: 'c_scale,h_146,q_100,w_200',
-	md: 'c_scale,h_291,q_100,w_400',
-	lg: 'c_scale,h_583,q_100,w_800',
-	xl: 'c_scale,h_662,q_100,w_910',
+	sm: 'w_200,ar_16:9,c_fill,g_auto,e_sharpen',
+	md: 'w_400,ar_16:9,c_fill,g_auto,e_sharpen',
+	lg: 'w_800,ar_16:9,c_fill,g_auto,e_sharpen',
+	xl: 'w_1200,ar_16:9,c_fill,g_auto,e_sharpen',
+	xxl: 'w_1400,ar_16:9,c_fill,g_auto,e_sharpen',
+	xxxl: 'w_1600,ar_16:9,c_fill,g_auto,e_sharpen',
 	sharp_img: 'w_1000,ar_16:9,c_fill,g_auto,e_sharpen'
 };
 
