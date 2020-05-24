@@ -3,7 +3,7 @@
   "short_name": "\u003cROBIN /\u003e",
   "theme_color": "#2196f3",
   "background_color": "#2196f3",
-  "display": "browser",
+  "display": "minimal-ui",
   "orientation": "portrait",
   "Scope": "/",
   "start_url": "/",
