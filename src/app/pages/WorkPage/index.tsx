@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { History } from 'history';
 import { Models } from 'app/models';
 import { Loader } from 'app/components';
+import { cloudinaryUrl, cloudinarySizes } from 'app/constants';
 
 export namespace Work {
 	export interface Props {
@@ -47,7 +48,7 @@ const WorkPage: React.FC<Work.Props> = (props: Work.Props) => {
 								<picture>
 									<Image 
 										sizes='(max-width: 800px) 100vw, 800px' 
-										src={work.sharp_img}
+										src={`${cloudinaryUrl}${cloudinarySizes.sharp_img}${work.url}`}
 										// srcSet={`${work.sm} 200w, ${work.md} 400w, ${work.lg} 800w, ${work.xl} 1200w`}
 									/>
 								</picture>
