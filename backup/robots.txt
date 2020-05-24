@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: 
+Disallow: /about/
+Disallow: /work/
+Disallow: /photography/
+Disallow: /contact/

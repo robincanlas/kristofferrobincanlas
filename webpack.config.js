@@ -7,6 +7,7 @@ const outPath = path.join(__dirname, './build');
 // plugins
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = (env, option) => {
@@ -60,38 +61,55 @@ module.exports = (env, option) => {
           ].filter(Boolean)
         },
         {
-          test: /\.css$/,
-          use: [
-            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+          oneOf: [
             {
-              loader: 'css-loader',
-              query: {
-                modules: true,
-                sourceMap: !isProduction,
-                importLoaders: 1,
-                modules: {
-                  localIdentName: isProduction ? '[hash:base64:5]' : '[local]__[hash:base64:5]'
+              test: /\.css$/,
+              include: /node_modules/,
+              use: [
+                "style-loader",
+                {
+                  loader: "css-loader",
+                  options: {
+                    modules: false
+                  }
                 }
-              }
+              ]
             },
             {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                plugins: [
-                  require('postcss-import')({ addDependencyTo: webpack }),
-                  require('postcss-url')(),
-                  require('postcss-preset-env')({
-                    /* use stage 2 features (defaults) */
-                    stage: 2
-                  }),
-                  require('postcss-reporter')(),
-                  require('postcss-browser-reporter')({
-                    disabled: isProduction
-                  })
-                ]
-              }
-            }
+              test: /\.css$/,
+              use: [
+                isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                {
+                  loader: 'css-loader',
+                  query: {
+                    modules: true,
+                    sourceMap: !isProduction,
+                    importLoaders: 1,
+                    modules: {
+                      localIdentName: isProduction ? '[hash:base64:5]' : '[local]__[hash:base64:5]'
+                    }
+                  }
+                },
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    ident: 'postcss',
+                    plugins: [
+                      require('postcss-import')({ addDependencyTo: webpack }),
+                      require('postcss-url')(),
+                      require('postcss-preset-env')({
+                        /* use stage 2 features (defaults) */
+                        stage: 2
+                      }),
+                      require('postcss-reporter')(),
+                      require('postcss-browser-reporter')({
+                        disabled: isProduction
+                      })
+                    ]
+                  }
+                }
+              ]
+            },
           ]
         },
         // static assets
@@ -149,6 +167,9 @@ module.exports = (env, option) => {
         //   description: package.description,
         //   keywords: Array.isArray(package.keywords) ? package.keywords.join(',') : undefined
         // }
+      }),
+      new ScriptExtHtmlWebpackPlugin({
+        defaultAttribute: 'async'
       })
     ],
     devServer: {

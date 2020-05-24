@@ -1,4 +1,4 @@
-footer {
+#footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,17 +8,17 @@ footer {
   height: 130px;
 }
 
-footer > .hosting {
+#footer > .hosting {
   display: grid;
   grid-template-columns: repeat(2,1fr);
   margin-bottom: 10px;
 }
 
-footer > .hosting > a {
+#footer > .hosting > a {
   text-decoration: none;
   color: var(--font-color);
 }
 
-footer > p {
+#footer > p {
   text-align: center;
 }

@@ -58,6 +58,7 @@
     "react-hot-loader": "^4.12.20",
     "redux-actions": "^2.6.5",
     "redux-thunk": "^2.3.0",
+    "script-ext-html-webpack-plugin": "^2.1.4",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.1.4",
     "ts-jest": "^25.4.0",
@@ -66,7 +67,7 @@
     "url-loader": "^4.1.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
