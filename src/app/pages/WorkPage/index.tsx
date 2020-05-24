@@ -9,7 +9,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { useHistory } from 'react-router-dom';
 import { History } from 'history';
 import { Models } from 'app/models';
-import { ProgressiveImage } from 'app/components';
+import { ProgressiveImage, Loader } from 'app/components';
 import { cloudinaryUrl, cloudinarySizes } from 'app/constants';
 
 export namespace Work {
@@ -34,7 +34,7 @@ const WorkPage: React.FC<Work.Props> = (props: Work.Props) => {
 
 	const render = (): JSX.Element => {
 		if (props.work.isLoading) {
-			// return <Loader />;
+			return <Loader />;
 		}
 		
 		return (
