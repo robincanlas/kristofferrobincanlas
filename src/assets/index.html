@@ -9,7 +9,7 @@
     <link rel="canonical" href="https://kristofferrobincanlas.com/" />
     <meta name="title" content="Kristoffer Robin Canlas">
     <meta name="description" content="Kristoffer Robin Canlas, a Web Developer based in Quezon City, Philippines.">
-    <meta name="theme-color" content="#fa6e70"/>
+    <meta name="theme-color" content="#3e92a3"/>
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kristofferrobincanlas.com/">
@@ -63,10 +63,15 @@
 <body>
     <div id="root"></div>
     <script>
-        // register ServiceWorker, remember to use absolute path!
-        if (navigator.serviceWorker) {
-            navigator.serviceWorker.register('/service-worker.js', {scope: '/'})
-        }
+        // if ('serviceWorker' in navigator) {
+        //     window.addEventListener('load', () => {
+        //         navigator.serviceWorker.register('/service-worker.js').then(registration => {
+        //             console.log('SW registered: ', registration);
+        //         }).catch(registrationError => {
+        //             console.log('SW registration failed: ', registrationError);
+        //         });
+        //     });
+        // }
         // --- Application code here ---
     </script>
 </body>

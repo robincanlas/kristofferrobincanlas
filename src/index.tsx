@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from './app';
 import { Provider } from 'react-redux';
 import { configureStore } from 'app/store';
-// import { register } from './registerServiceWorker';
 
 import 'semantic-ui-css/components/reset.min.css';
 import 'semantic-ui-css/components/site.min.css';
@@ -27,5 +26,3 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById('root')
 );
-
-// register();

@@ -70,13 +70,13 @@ export const Header: React.FC<Header.Props> = (props: Header.Props) => {
 			<Menu id={style.nav} className={`${isScrollUp ? style.unpinned : ''}`} text>
 				<span className={`${style.pattern} ${top ? '' : style['show-bg']}`}></span>
 				<span className={`${style.bg} ${top ? '' : style['show-bg']} ${isWorkDescriptionPage || isPhotoPage ? style['lights-off'] : ''}`}></span>
-				<Menu.Item className={style.name} onClick={() => history.push('/')} header>
+				<Menu.Item tabIndex={0} className={style.name} onClick={() => history.push('/')} header>
 					<span className={style.tag}>{openTag}</span>
 					<span>{name}</span>
 					<span className={style.tag}>{closeTag}</span>
 				</Menu.Item>
 				<Menu.Menu className={style.menu} position='right'>
-					{navs.map((nav) => (
+					{navs.map((nav, index) => (
 						<Menu.Item
 							key={nav.name}
 							name={nav.name}
