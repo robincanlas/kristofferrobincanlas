@@ -1,10 +1,22 @@
 import * as React from 'react';
-import { Container } from 'semantic-ui-react';
+import * as style from './style.css';
+import { Container, Header, Button, Message } from 'semantic-ui-react';
+import { useHistory } from 'react-router-dom';
+import { History } from 'history';
 
 export const NotFoundPage: React.FC<{}> = (props: {}) => {
+	const history: History = useHistory();
 	return (
 		<Container>
-			404 Not Found
+			<span id={style.wrapper}>
+				<Message warning compact>
+					<Message.Header>404 Not Found!</Message.Header>
+					<Header className={style.big}>NOT ALL WHO</Header>
+					<Header className={style.big}>WANDER ARE LOST</Header>
+					<Header>But you're definitely not supposed to be here.</Header>
+				</Message>
+				<Button onClick={() => history.push('/')} color='black' >Go Home</Button>
+			</span>
 		</Container>
 	);
 };
