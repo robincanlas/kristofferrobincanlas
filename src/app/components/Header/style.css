@@ -59,6 +59,7 @@
   text-transform: uppercase;
   text-shadow: 1px 5px 8px black;
   transition: color 450ms ease;
+  outline-width: 0;
 }
 
 #nav > .menu > a::after {
