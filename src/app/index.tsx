@@ -11,8 +11,23 @@ import {
 	WorkDescriptionPage,
 	NotFoundPage } from './pages';
 import { History } from 'history';
+import { connect } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
+import { WorkActions } from './store/work/actions';
+import { PhotoActions } from './store/photography/actions';
 
-export const App: React.FC = () => {
+export namespace _App {
+	export interface Props {
+		informationActions?: null;
+		workActions?: WorkActions;
+		photoActions?: PhotoActions;
+	}
+}
+
+export const _App: React.FC<_App.Props> = ({
+	workActions = WorkActions,
+	photoActions = PhotoActions
+}: _App.Props) => {
 	const history: History = useHistory();
 	const defaultTitle: string = 'Kristoffer Robin Canlas';
 	const [overlayNav, setOverlayNav] = React.useState(false);
@@ -21,10 +36,11 @@ export const App: React.FC = () => {
 		const currentPath: string = history.location.pathname.split('/')[1].toUpperCase();
 		const title: string = currentPath === '' ? defaultTitle : `${defaultTitle} | ${currentPath}`;
 		document.title = title;
-		// document.body.style.backgroundImage = currentPath === 'PROJECTS' ? 'none' : 'var(--background-image)';
 	};
 
 	React.useEffect(() => {
+		workActions.getWork();
+		photoActions.getPhotos();
 		changeTitle();
 		return history.listen(() => {
 			changeTitle();
@@ -63,3 +79,15 @@ export const App: React.FC = () => {
 		</React.Fragment>
 	);
 };
+
+const mapStateToProps = null;
+const mapDispatchToProps = (dispatch: Dispatch): Pick<_App.Props, 'informationActions' | 'workActions' | 'photoActions'> => ({
+	informationActions: null,
+	workActions: bindActionCreators(WorkActions, dispatch),
+	photoActions: bindActionCreators(PhotoActions, dispatch) 
+});
+
+export const App: React.FC<_App.Props> = connect(
+	mapStateToProps,	
+	mapDispatchToProps
+)(_App);

@@ -22,11 +22,11 @@ export namespace Work {
 const WorkPage: React.FC<Work.Props> = (props: Work.Props) => {
 	const history: History = useHistory();
 
-	React.useEffect(() => {
-		if (props.work.works.length === 0) { // <<-- if already fetch don't fetch anymore
-			props.actions.getWork();
-		}
-	}, []);
+	// React.useEffect(() => {
+		// if (props.work.works.length === 0) { // <<-- if already fetch don't fetch anymore
+		// 	props.actions.getWork();
+		// }
+	// }, []);
 
 	const redirect = (work: Models.Work, index: number) => {
 		history.push('/work/' + work.id);

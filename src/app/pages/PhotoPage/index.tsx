@@ -31,11 +31,11 @@ const PhotoPage: React.FC<Photo.Props> = (props: Photo.Props) => {
 		return photos;
 	};
 
-	React.useEffect(() => {
-		if (props.photography.photos.length === 0) { // <<-- if already fetch don't fetch anymore
-			props.photoActions.getPhotos();
-		}
-	}, []);
+	// React.useEffect(() => {
+	// 	if (props.photography.photos.length === 0) { // <<-- if already fetch don't fetch anymore
+	// 		props.photoActions.getPhotos();
+	// 	}
+	// }, []);
 
 	const onScroll = () => {
 		/* Need to round the value so it can reach the scroll height */
