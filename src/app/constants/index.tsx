@@ -8,7 +8,8 @@ export interface Sizes { [key: string]: string; }
 
 export const endPoint: Models.EndPoint = {
 	photos: 'https://robincanlas-server.herokuapp.com/photos',
-	work: 'https://robincanlas-server.herokuapp.com/projects'
+	work: 'https://robincanlas-server.herokuapp.com/projects',
+	information: 'https://robincanlas-server.herokuapp.com/information'
 };
 
 export const cloudinaryUrl: string = 'https://res.cloudinary.com/speedforce/image/upload/';

@@ -7,6 +7,7 @@ export namespace Models {
 	export interface EndPoint {
 		photos: string;
 		work: string;
+		information: string;
 	}
 
 	export interface Nav {
@@ -41,5 +42,10 @@ export namespace Models {
 		current: Work;
 		previous: string | null;
 		next: string | null;
+	}
+
+	// TO DO: update for site information and create a DBMS
+	export interface Information {
+		isEmployed: boolean;
 	}
 }

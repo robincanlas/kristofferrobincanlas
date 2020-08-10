@@ -1,6 +1,9 @@
 import * as React from 'react';
 import * as style from './style.css';
 import { Container, Header, Icon } from 'semantic-ui-react';
+import { endPoint } from 'app/constants';
+import { Models } from 'app/models';
+import axios, { AxiosResponse } from 'axios';
 
 export namespace ContactPage {
 	export interface Props {
@@ -8,15 +11,20 @@ export namespace ContactPage {
 }
 
 export const ContactPage: React.FC<ContactPage.Props> = (props: ContactPage.Props) => {
-	const isEmployed: boolean = true;
-	// const [isEmployed, setIsEmployed] = React.useState<boolean>(false);
+	const [isEmployed, setIsEmployed] = React.useState<boolean>(false);
 
-	// React.useEffect(() => {
-	// 	setIsEmployed(true);
-	// 	return(() => {
-	// 		// unmount
-	// 	});
-	// }, []);
+	React.useEffect(() => {
+		axios.get(endPoint.information)
+		.then((response: AxiosResponse<Models.Information>) => {
+			setIsEmployed(response.data.isEmployed);
+		})
+		.catch(error => {
+			console.log('Contact Page', error);
+		});
+		return(() => {
+			// unmount
+		});
+	}, []);
 
 	return (
 		<Container id={style.container}>

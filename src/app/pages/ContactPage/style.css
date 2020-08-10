@@ -25,6 +25,7 @@
 
 #container > .contact > span > p.linethru {
   text-decoration: line-through;
+  color: rgb(223 224 212 / 0.69);
 }
 
 #container > .contact > .details {
