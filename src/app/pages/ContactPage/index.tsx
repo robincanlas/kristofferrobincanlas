@@ -8,15 +8,30 @@ export namespace ContactPage {
 }
 
 export const ContactPage: React.FC<ContactPage.Props> = (props: ContactPage.Props) => {
+	const isEmployed: boolean = true;
+	// const [isEmployed, setIsEmployed] = React.useState<boolean>(false);
+
+	// React.useEffect(() => {
+	// 	setIsEmployed(true);
+	// 	return(() => {
+	// 		// unmount
+	// 	});
+	// }, []);
+
 	return (
 		<Container id={style.container}>
 			<span className={style.contact}>
 				<Header>
 					Contact Me
 				</Header>
-				<p>
-					I'd love to hear from you! I'm currently available for freelance projects and interested in full-time positions.
-				</p>
+				<span>
+					<p>
+						I'd love to hear from you! I'm currently available for freelance projects &nbsp;
+					</p>
+					<p className={`${isEmployed ? style.linethru : ''}`}>
+						and interested in full-time position.
+					</p>
+				</span>
 				<p>
 					Here's how you can reach me: 
 				</p>

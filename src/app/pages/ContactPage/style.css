@@ -17,8 +17,14 @@
   color: var(--font-color-2);
 }
 
-#container > .contact > p {
+#container > .contact > p,
+#container > .contact > span > p {
   font-size: 1.5em;
+  display: inline;
+}
+
+#container > .contact > span > p.linethru {
+  text-decoration: line-through;
 }
 
 #container > .contact > .details {
