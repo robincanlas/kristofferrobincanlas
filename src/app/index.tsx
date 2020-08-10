@@ -15,16 +15,18 @@ import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { WorkActions } from './store/work/actions';
 import { PhotoActions } from './store/photography/actions';
+import { InformationActions } from './store/information/actions';
 
 export namespace _App {
 	export interface Props {
-		informationActions?: null;
+		informationActions?: InformationActions;
 		workActions?: WorkActions;
 		photoActions?: PhotoActions;
 	}
 }
 
 export const _App: React.FC<_App.Props> = ({
+	informationActions = InformationActions,
 	workActions = WorkActions,
 	photoActions = PhotoActions
 }: _App.Props) => {
@@ -39,6 +41,7 @@ export const _App: React.FC<_App.Props> = ({
 	};
 
 	React.useEffect(() => {
+		informationActions.get();
 		workActions.getWork();
 		photoActions.getPhotos();
 		changeTitle();
@@ -81,8 +84,9 @@ export const _App: React.FC<_App.Props> = ({
 };
 
 const mapStateToProps = null;
+
 const mapDispatchToProps = (dispatch: Dispatch): Pick<_App.Props, 'informationActions' | 'workActions' | 'photoActions'> => ({
-	informationActions: null,
+	informationActions: bindActionCreators(InformationActions, dispatch),
 	workActions: bindActionCreators(WorkActions, dispatch),
 	photoActions: bindActionCreators(PhotoActions, dispatch) 
 });

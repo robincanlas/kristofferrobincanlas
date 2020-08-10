@@ -1,30 +1,26 @@
 import * as React from 'react';
 import * as style from './style.css';
 import { Container, Header, Icon } from 'semantic-ui-react';
-import { endPoint } from 'app/constants';
+import { RootState } from 'app/store';
+import { connect } from 'react-redux';
 import { Models } from 'app/models';
-import axios, { AxiosResponse } from 'axios';
+import { Loader } from 'app/components';
 
-export namespace ContactPage {
+export namespace _ContactPage {
 	export interface Props {
+		information?: Models.Information | null;
+		isLoading?: boolean;
 	}	
 }
 
-export const ContactPage: React.FC<ContactPage.Props> = (props: ContactPage.Props) => {
-	const [isEmployed, setIsEmployed] = React.useState<boolean>(false);
+export const _ContactPage: React.FC<_ContactPage.Props> = ({
+	information = null,
+	isLoading = true
+}: _ContactPage.Props) => {
 
-	React.useEffect(() => {
-		axios.get(endPoint.information)
-		.then((response: AxiosResponse<Models.Information>) => {
-			setIsEmployed(response.data.isEmployed);
-		})
-		.catch(error => {
-			console.log('Contact Page', error);
-		});
-		return(() => {
-			// unmount
-		});
-	}, []);
+	if (isLoading || !information) {
+		return <Loader />;
+	}
 
 	return (
 		<Container id={style.container}>
@@ -36,7 +32,7 @@ export const ContactPage: React.FC<ContactPage.Props> = (props: ContactPage.Prop
 					<p>
 						I'd love to hear from you! I'm currently available for freelance projects &nbsp;
 					</p>
-					<p className={`${isEmployed ? style.linethru : ''}`}>
+					<p className={`${information.isEmployed ? style.linethru : ''}`}>
 						and interested in full-time position.
 					</p>
 				</span>
@@ -47,15 +43,29 @@ export const ContactPage: React.FC<ContactPage.Props> = (props: ContactPage.Prop
 					<span>
 						<Icon size='huge' name='mail outline'/>
 						<div className={style.text}>Email</div>
-						<div className={style.text}>kristofferrobincanlas@gmail.com</div>
+						<div className={style.text}>{information.email}</div>
 					</span>
 					<span>
 						<Icon size='huge' name='mobile alternate'/>
 						<div className={style.text}>Phone</div>
-						<div className={style.text}>+63906-4636-752</div>
+						<div className={style.text}>{information.phone}</div>
 					</span>
 				</span>
 			</span>			
 		</Container>
 	);
 };
+
+const mapStateToProps = (state: RootState): Pick<_ContactPage.Props, 'information' | 'isLoading'> => {
+	return {
+		information: state.information.information,
+		isLoading: state.information.isLoading
+	};
+};
+
+const mapDispatchToProps = null;
+
+export const ContactPage: React.FC<_ContactPage.Props> = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(_ContactPage);

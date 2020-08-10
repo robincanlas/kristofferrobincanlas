@@ -44,8 +44,10 @@ export namespace Models {
 		next: string | null;
 	}
 
-	// TO DO: update for site information and create a DBMS
+	// TO DO: update this for portfolio information and create a DBMS
 	export interface Information {
 		isEmployed: boolean;
+		phone: string;
+		email: string;
 	}
 }
