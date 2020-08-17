@@ -3,12 +3,17 @@
   grid-gap: .25rem;
 }
 
+.gallery-list > span {
+  position: relative;
+}
+
+
 .gallery-list > span > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: bounce 1s .3s;
-  transform: scale(1);
+  /* animation: bounce 1s .3s; */
+  /* transform: scale(1); */
 }
 
 @keyframes bounce {

@@ -21,6 +21,7 @@ export namespace Models {
 		thumbnail: string;
 		url: string;
 		src: string;
+		raw: string;
 	}
 	
 	export interface Work {

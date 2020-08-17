@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as style from './style.css';
-import { Container, Image } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { PhotoActions } from 'app/store/photography/actions';
 import { PhotoState } from 'app/store/photography/state';
 import { RootState } from 'app/store';
 import { Models } from 'app/models';
-import { Loader } from 'app/components';
+import { Loader, ProgressiveImage } from 'app/components';
 
 export namespace Photo {
 	export interface Props {
@@ -62,7 +62,15 @@ const PhotoPage: React.FC<Photo.Props> = (props: Photo.Props) => {
 				<span className={style['gallery-list']}>
 					{getPhotos().map(element => (
 						<span key={element.id}>
-							<Image src={element.src} />
+							<ProgressiveImage 
+								sizes='(max-width: 800px) 100vw, 800px'
+								preview={`https://farm2.staticflickr.com/${element.raw}_s.jpg`}
+								image={element.src}
+								srcSet={`${element.src} 200w,
+									${element.src} 400w,
+									${element.src} 800w
+								`}
+							/>
 						</span>
 					))}
 				</span>
