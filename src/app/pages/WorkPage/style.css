@@ -15,8 +15,10 @@
 }
 
 #work > .screenshots {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   grid-gap: 2em;
   position: relative;
 }
@@ -28,6 +30,7 @@
   cursor: pointer;
   overflow: hidden;
   box-shadow: 0 5px 10px 0 rgba(0,0,0,.3);
+  width: 100%;
 }
 
 #work .project-image{
@@ -121,17 +124,21 @@
   color: var(--bg-color-3)
 }
 
-@media (min-width: 768px) { 
+@media (min-width: 769px) { 
   #work > .screenshots {
     margin: 0 5em;
+  }
+
+  #work > .screenshots > span {
+    width: calc(50% - 7em);
   }
 }
 
 /* to desktop */
 @media (min-width: 1024px) { 
   #work > .screenshots {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    width: 90%;
+    /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
+    width: 100%;
     /* width: 70%; */
     margin: 0 auto;
   }
