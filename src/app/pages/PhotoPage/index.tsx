@@ -9,33 +9,28 @@ import { RootState } from 'app/store';
 import { Models } from 'app/models';
 import { Loader, ProgressiveImage } from 'app/components';
 
-export namespace Photo {
+export namespace _PhotoPage {
 	export interface Props {
 		photography: PhotoState;
 		photoActions: PhotoActions;
 	}
 }
 
-const PhotoPage: React.FC<Photo.Props> = (props: Photo.Props) => {
+const _PhotoPage: React.FC<_PhotoPage.Props> = (props: _PhotoPage.Props) => {
 	let limit: number = 20;
-	const [count, setCount]: [number, Function] = React.useState(1);
+	const [count, setCount] = React.useState<number>(1);
+	const [photos, setPhotos] = React.useState<Models.Photo[]>([]);
 
-	const getPhotos = (): Models.Photo[] => {
-		const photos = [];
-		for (let i = 0; i < props.photography.photos.length; i++) {
+	const getPhotos = () => {
+		const newPhotos: Models.Photo[] = [];
+		for (let i = photos.length; i < props.photography.photos.length; i++) {
 			if (limit * count === i) {
 				break;
 			}
-			photos.push(props.photography.photos[i]);
+			newPhotos.push(props.photography.photos[i]);
 		}
-		return photos;
+		setPhotos(oldPhotos => oldPhotos.concat(newPhotos));
 	};
-
-	// React.useEffect(() => {
-	// 	if (props.photography.photos.length === 0) { // <<-- if already fetch don't fetch anymore
-	// 		props.photoActions.getPhotos();
-	// 	}
-	// }, []);
 
 	const onScroll = () => {
 		/* Need to round the value so it can reach the scroll height */
@@ -46,6 +41,7 @@ const PhotoPage: React.FC<Photo.Props> = (props: Photo.Props) => {
 	};
 
 	React.useEffect(() => {
+		getPhotos();
 		window.addEventListener('scroll', onScroll, false);
 		return () => {
 			window.removeEventListener('scroll', onScroll);
@@ -60,7 +56,7 @@ const PhotoPage: React.FC<Photo.Props> = (props: Photo.Props) => {
 		return (
 			<Container id={style.container}>
 				<span className={style['gallery-list']}>
-					{getPhotos().map(element => (
+					{photos.map(element => (
 						<span key={element.id}>
 							<ProgressiveImage 
 								sizes='(max-width: 800px) 100vw, 800px'
@@ -81,15 +77,13 @@ const PhotoPage: React.FC<Photo.Props> = (props: Photo.Props) => {
 	return render();
 };
 
-const Photo: React.FC<Photo.Props> = connect(
-	(state: RootState, ownProps): Pick<Photo.Props, 'photography'> => {
+export const PhotoPage: React.FC<_PhotoPage.Props> = connect(
+	(state: RootState, ownProps): Pick<_PhotoPage.Props, 'photography'> => {
 		return {
 			photography: state.photography
 		};
 	},
-	(dispatch: Dispatch): Pick<Photo.Props, 'photoActions'> => ({
+	(dispatch: Dispatch): Pick<_PhotoPage.Props, 'photoActions'> => ({
 		photoActions: bindActionCreators(PhotoActions, dispatch) 
 	})
-)(PhotoPage);
-
-export { Photo as PhotoPage };
+)(_PhotoPage);
