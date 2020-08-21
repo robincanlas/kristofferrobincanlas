@@ -1,0 +1,35 @@
+.cursor {
+  width: 25px;
+  height: 25px;
+  border: 1.5px solid #ffffffc7;
+  border-radius: 50%;
+  z-index: 4;
+  pointer-events: none;
+  top: 0px;
+  left: 0px;
+  transition: all 200ms ease-out;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  display: none;
+}
+
+.dot {
+  background: #ffffffc7;
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  z-index: 4;
+  top: 0px;
+  left: 0px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  display: none;
+}
+
+/* to desktop */
+@media (min-width: 769px) { 
+  .cursor, .dot {
+    display: block;
+  }
+}

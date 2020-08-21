@@ -22,4 +22,11 @@ body {
   color: var(--font-color) !important;
 }
 
+/* to desktop */
+@media (min-width: 769px) { 
+  html, body {
+    cursor: none;
+  }
+}
+
 /* DEFAULTS [E] */

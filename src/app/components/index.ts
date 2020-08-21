@@ -4,3 +4,4 @@ export * from './SVGIcons';
 export * from './OverlayNav';
 export * from './Loader';
 export * from './ProgressiveImage';
+export * from './Cursor';
