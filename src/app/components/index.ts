@@ -5,3 +5,4 @@ export * from './OverlayNav';
 export * from './Loader';
 export * from './ProgressiveImage';
 export * from './Cursor';
+export * from './Photo';
