@@ -14,6 +14,8 @@ import 'semantic-ui-css/components/message.min.css';
 import 'semantic-ui-css/components/header.min.css';
 import 'semantic-ui-css/components/image.min.css';
 import 'semantic-ui-css/components/button.min.css';
+import 'semantic-ui-css/components/modal.min.css';
+import 'semantic-ui-css/components/dimmer.min.css';
 import 'normalize.css';
 import './default.css';
 

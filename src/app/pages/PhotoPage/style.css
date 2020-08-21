@@ -5,6 +5,7 @@
 
 .gallery-list > span {
   position: relative;
+  cursor: pointer;
 }
 
 
@@ -14,6 +15,14 @@
   object-fit: cover;
   /* animation: bounce 1s .3s; */
   /* transform: scale(1); */
+}
+
+.modal-image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 @keyframes bounce {

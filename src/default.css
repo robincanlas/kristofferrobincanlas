@@ -24,9 +24,9 @@ body {
 
 /* to desktop */
 @media (min-width: 769px) { 
-  html, body {
+  /* html, body {
     cursor: none;
-  }
+  } */
 }
 
 /* DEFAULTS [E] */
