@@ -33,6 +33,7 @@ export const Photo: React.FC<Photo.Props> = (props: Photo.Props) => {
 	const getModal = (): JSX.Element => {
 		return (
 			<Modal
+				basic
 				size='large'
 				centered={true}
 				onClose={() => setModalData(initialModalData)}
