@@ -18,35 +18,52 @@ export namespace _PhotoPage {
 
 const _PhotoPage: React.FC<_PhotoPage.Props> = (props: _PhotoPage.Props) => {
 	let limit: number = 20;
-	const [count, setCount] = React.useState<number>(1);
+	const [pageNumber, setPageNumber] = React.useState<number>(1);
 	const [photos, setPhotos] = React.useState<Models.Photo[]>([]);
+	const [maxPageNumber, setMaxPageNumber] = React.useState<number>(0);
+	const [loading, setLoading] = React.useState<boolean>(true);
+	const watcher: React.MutableRefObject<IntersectionObserver | undefined> = React.useRef();	
+	
+	React.useEffect(() => {
+		setMaxPageNumber(Math.round(props.photography.photos.length / limit));
+	}, [props.photography.photos]);
+
+	const lastPhotoRef: (node: any) => void = React.useCallback(node => {
+		if (loading) return;
+		if (watcher.current) {
+			watcher.current.disconnect();
+		}
+		watcher.current = new IntersectionObserver(entries => {
+			if (entries[0].isIntersecting && pageNumber !== maxPageNumber) {
+				setPageNumber(prevPageNumber => prevPageNumber + 1);
+				console.log('VISIBLe');
+			}
+		});
+		if (node) {
+			watcher.current.observe(node);
+		}
+	}, [photos, props.photography.photos, pageNumber, maxPageNumber, loading]);
 
 	const getPhotos = () => {
+		console.log('get photos');
 		const newPhotos: Models.Photo[] = [];
 		for (let i = photos.length; i < props.photography.photos.length; i++) {
-			if (limit * count === i) {
+			if (limit * pageNumber === i) {
 				break;
 			}
 			newPhotos.push(props.photography.photos[i]);
 		}
-		setPhotos(oldPhotos => oldPhotos.concat(newPhotos));
-	};
-
-	const onScroll = () => {
-		/* Need to round the value so it can reach the scroll height */
-		if ((Math.round(window.scrollY) + window.innerHeight) >= document.body.scrollHeight && (count * limit) <= props.photography.photos.length) {
-			const newCount: number = count + 1;
-			setCount(newCount);
-		}
+		setPhotos((oldPhotos) => oldPhotos.concat(newPhotos));
 	};
 
 	React.useEffect(() => {
+		setLoading(false);
+	}, [photos]);
+
+	React.useEffect(() => {
+		setLoading(true);
 		getPhotos();
-		window.addEventListener('scroll', onScroll, false);
-		return () => {
-			window.removeEventListener('scroll', onScroll);
-		};	
-	}, [props.photography.photos, count]);
+	}, [props.photography.photos, pageNumber]);
 
 	const render = (): JSX.Element => {
 		if (props.photography.isLoading) {
@@ -56,9 +73,13 @@ const _PhotoPage: React.FC<_PhotoPage.Props> = (props: _PhotoPage.Props) => {
 		return (
 			<Container id={style.container}>
 				<span className={style['gallery-list']}>
-					{photos.map(element => (
-						<Photo photo={element} key={element.id} />
-					))}
+					{photos.map((element, index) => {
+						if (index + 1 === photos.length) {
+							return <Photo lastPhotoRef={lastPhotoRef} photo={element} key={element.id} />;
+						} else {
+							return <Photo photo={element} key={element.id} />;
+						}
+					})}
 				</span>
 			</Container>
 		);

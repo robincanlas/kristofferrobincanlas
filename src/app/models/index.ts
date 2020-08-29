@@ -22,6 +22,7 @@ export namespace Models {
 		url: string;
 		src: string;
 		raw: string;
+		original: string;
 	}
 	
 	export interface Work {

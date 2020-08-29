@@ -7,6 +7,7 @@ import { Modal } from 'semantic-ui-react';
 export namespace Photo {
 	export interface Props {
 		photo: Models.Photo;
+		lastPhotoRef?: (node: any) => void;
 	}
 
 	export interface InitialModalData {
@@ -43,11 +44,11 @@ export const Photo: React.FC<Photo.Props> = (props: Photo.Props) => {
 				<div className={style['modal-image']}>
 					<ProgressiveImage 
 						sizes='(max-width: 800px) 100vw, 800px'
-						preview={`https://farm2.staticflickr.com/${modalData.data!.raw}_s.jpg`}
-						image={modalData.data!.src}
-						srcSet={`${modalData.data!.src} 200w,
-							${modalData.data!.src} 400w,
-							${modalData.data!.src} 800w
+						preview={`${modalData.data!.raw}_s.jpg`}
+						image={modalData.data!.original}
+						srcSet={`${modalData.data!.original} 200w,
+							${modalData.data!.original} 400w,
+							${modalData.data!.original} 800w
 						`}
 					/>
 				</div>
@@ -59,10 +60,10 @@ export const Photo: React.FC<Photo.Props> = (props: Photo.Props) => {
 	return (
 		<React.Fragment>
 			{modalData.open && getModal()}
-			<span onClick={() => openModal(props.photo)}>
+			<span ref={props.lastPhotoRef} onClick={() => openModal(props.photo)}>
 				<ProgressiveImage 
 					sizes='(max-width: 800px) 100vw, 800px'
-					preview={`https://farm2.staticflickr.com/${props.photo.raw}_s.jpg`}
+					preview={`${props.photo.raw}_s.jpg`}
 					image={props.photo.src}
 					srcSet={`${props.photo.src} 200w,
 						${props.photo.src} 400w,

@@ -36,9 +36,9 @@ export const OverlayNav: React.FC<OverlayNav.Props> = (props: OverlayNav.Props) 
 	useEffect(() => {
 		props.overlayNav ? 
 		document.body.style.overflow = 'hidden' :
-		document.body.style.overflow = 'auto';
+		document.body.style.overflow = '';
 		return() => {
-			document.body.style.overflow = 'auto';
+			document.body.style.overflow = '';
 		};
 	}, [props.overlayNav]);
 
