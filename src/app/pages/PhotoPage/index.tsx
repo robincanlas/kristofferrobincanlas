@@ -36,7 +36,6 @@ const _PhotoPage: React.FC<_PhotoPage.Props> = (props: _PhotoPage.Props) => {
 		watcher.current = new IntersectionObserver(entries => {
 			if (entries[0].isIntersecting && pageNumber !== maxPageNumber) {
 				setPageNumber(prevPageNumber => prevPageNumber + 1);
-				console.log('VISIBLe');
 			}
 		});
 		if (node) {
@@ -45,7 +44,6 @@ const _PhotoPage: React.FC<_PhotoPage.Props> = (props: _PhotoPage.Props) => {
 	}, [photos, props.photography.photos, pageNumber, maxPageNumber, loading]);
 
 	const getPhotos = () => {
-		console.log('get photos');
 		const newPhotos: Models.Photo[] = [];
 		for (let i = photos.length; i < props.photography.photos.length; i++) {
 			if (limit * pageNumber === i) {
