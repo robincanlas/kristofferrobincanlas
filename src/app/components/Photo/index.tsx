@@ -39,16 +39,17 @@ export const Photo: React.FC<Photo.Props> = (props: Photo.Props) => {
 				centered={true}
 				onClose={() => setModalData(initialModalData)}
 				open={modalData.open}
+				// closeIcon
 			>
 			<Modal.Content image>
-				<div className={style['modal-image']}>
+				<div onClick={() => setModalData(initialModalData)} className={style['modal-image']}>
 					<ProgressiveImage 
 						sizes='(max-width: 800px) 100vw, 800px'
 						preview={`${modalData.data!.raw}_s.jpg`}
-						image={modalData.data!.original}
-						srcSet={`${modalData.data!.original} 200w,
-							${modalData.data!.original} 400w,
-							${modalData.data!.original} 800w
+						image={modalData.data!.src}
+						srcSet={`${modalData.data!.src} 200w,
+							${modalData.data!.src} 400w,
+							${modalData.data!.src} 800w
 						`}
 					/>
 				</div>

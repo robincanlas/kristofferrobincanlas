@@ -5,7 +5,7 @@
 
 .gallery-list > span {
   position: relative;
-  cursor: pointer;
+  cursor: zoom-in;
 }
 
 
