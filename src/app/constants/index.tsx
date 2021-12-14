@@ -5,14 +5,8 @@ import { CreateJS, CSS, HTML5, Javascript, ReactJS, Redux, Typescript, Github, H
 export const assetsPath: string =  '../../assets';
 export interface Icon { [key: string]: JSX.Element; }
 export interface Sizes { [key: string]: string; }
+export * from 'app/constants/server_url';
 
-export const endPoint: Models.EndPoint = {
-	photos: 'https://robincanlas-server.herokuapp.com/photos',
-	work: 'https://robincanlas-server.herokuapp.com/projects',
-	information: 'https://robincanlas-server.herokuapp.com/information'
-};
-
-export const cloudinaryUrl: string = 'https://res.cloudinary.com/speedforce/image/upload/';
 export const cloudinarySizes: Sizes = {
 	tiny: 'c_scale,h_40,w_70',
 	xs: 'c_scale,h_50,q_100,w_50',
