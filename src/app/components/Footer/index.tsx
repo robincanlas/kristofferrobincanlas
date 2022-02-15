@@ -7,7 +7,7 @@ export namespace Footer {
 }
 
 export const Footer: React.FC<Footer.Props> = (props: Footer.Props) => { 
-	const currentYear: number = new Date().getFullYear();
+	const currentYear: number = 2020;
 	return (
 		<footer id={style.footer}>
 			<div className={style.hosting}>
