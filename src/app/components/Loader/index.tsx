@@ -3,6 +3,17 @@ import * as style from './style.css';
 import { Header } from 'semantic-ui-react';
 
 export const Loader = () => {
+	const [lodingText, setLoadingText] = React.useState<string>('Loading...');
+
+	React.useEffect(() => {
+		setTimeout(() => {
+			setLoadingText('Waking up the servers...');
+			setTimeout(() => {
+				setLoadingText('Servers are now waking up...');
+			}, 10000);
+		}, 10000);
+	}, []);
+
 	return(
 		<React.Fragment>
 			<div id={style.container}>
@@ -24,7 +35,7 @@ export const Loader = () => {
 					<span></span>
 					<span></span>
 				</div>
-				<Header as='h3'>Loading...</Header>
+				<Header as='h3'>{lodingText}</Header>
 			</div> 			
 		</ React.Fragment>
 	);
