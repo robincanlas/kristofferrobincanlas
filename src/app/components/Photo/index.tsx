@@ -39,29 +39,39 @@ export const Photo: React.FC<Photo.Props> = (props: Photo.Props) => {
 				centered={true}
 				onClose={() => setModalData(initialModalData)}
 				open={modalData.open}
+				// dimmer='blurring'
 				// closeIcon
 			>
-			<Modal.Content image>
-				<div onClick={() => setModalData(initialModalData)} className={style['modal-image']}>
-					<ProgressiveImage 
-						sizes='(max-width: 800px) 100vw, 800px'
-						preview={`${modalData.data!.raw}_s.jpg`}
-						image={modalData.data!.src}
-						srcSet={`${modalData.data!.src} 200w,
-							${modalData.data!.src} 400w,
-							${modalData.data!.src} 800w
-						`}
-					/>
-				</div>
-			</Modal.Content>
-		</Modal>
+				<>
+				{modalData.open && 
+					<>
+						<div onClick={() => setModalData(initialModalData)} className={style['modal-bg-img']}>
+						<img src={`${props.photo.raw}_s.jpg`} />
+						</div>
+					</>
+				}
+				<Modal.Content image>
+					<div onClick={() => setModalData(initialModalData)} className={style['modal-image']}>
+						<ProgressiveImage 
+							sizes='(max-width: 800px) 100vw, 800px'
+							preview={`${modalData.data!.raw}_s.jpg`}
+							image={modalData.data!.src}
+							srcSet={`${modalData.data!.src} 200w,
+								${modalData.data!.src} 400w,
+								${modalData.data!.src} 800w
+							`}
+						/>
+					</div>
+				</Modal.Content>
+				</>
+			</Modal>
 		);
 	};
-
+	
 	return (
 		<React.Fragment>
 			{modalData.open && getModal()}
-			<span ref={props.lastPhotoRef} onClick={() => openModal(props.photo)}>
+			<span className='ttttt' ref={props.lastPhotoRef} onClick={() => openModal(props.photo)}>
 				<ProgressiveImage 
 					sizes='(max-width: 800px) 100vw, 800px'
 					preview={`${props.photo.raw}_s.jpg`}
