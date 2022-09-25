@@ -22,6 +22,10 @@ body {
   color: var(--font-color) !important;
 }
 
+:global(.ui.modals.dimmer) {
+  background-color: rgb(0 0 0 / 70%);
+}
+
 /* to desktop */
 @media (min-width: 769px) { 
   /* html, body {

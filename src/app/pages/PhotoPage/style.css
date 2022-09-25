@@ -17,6 +17,35 @@
   /* transform: scale(1); */
 }
 
+.custom-modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: blur(5px);
+}
+
+.custom-modal img {
+  width: 10%;
+  height: 10%;
+  object-fit: cover;
+  transform: scale(11);
+}
+
+.modal-image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: zoom-out;
+}
+
 @keyframes bounce {
   0% { transform: scale(1.02); opacity: 1 }
   50% { transform: scale(1.04); opacity: .7; }
