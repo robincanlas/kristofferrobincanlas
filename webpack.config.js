@@ -173,7 +173,7 @@ module.exports = (env, option) => {
       })
     ],
     devServer: {
-      // host: '192.168.100.8',
+      // host: '0.0.0.0',
       host: 'localhost',
       port: 8000,
       contentBase: sourcePath,
