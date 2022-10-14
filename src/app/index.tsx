@@ -66,7 +66,7 @@ export const _App: React.FC<_App.Props> = ({
 			<span className={`${style.bg} ${isWorkDescriptionPage || isPhotoPage ? style['lights-off'] : ''}`}></span>
 				<OverlayNav overlayNav={overlayNav} toggleOverlay={() => setOverlayNav(!overlayNav)} />
 				<span className={style.content}>
-					<Header toggleOverLay={() => setOverlayNav(!overlayNav)} />
+					<Header overlayNav={overlayNav} toggleOverLay={() => setOverlayNav(!overlayNav)} />
 					<span className={style.body}>
 						<Switch>
 							<Route exact path='/' component={HomePage} />

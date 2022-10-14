@@ -8,6 +8,7 @@ import { History } from 'history';
 
 export namespace Header {
 	export interface Props {
+    overlayNav: boolean;
 		toggleOverLay: () => void;
 	}
 }
@@ -86,7 +87,7 @@ export const Header: React.FC<Header.Props> = (props: Header.Props) => {
 					))}
 				</Menu.Menu>
 				<Menu.Item className={style.burger} position='right'>
-					<div onClick={props.toggleOverLay}>
+					<div aria-label={props.overlayNav ? 'close' : 'burger'} tabIndex={0} role='button' aria-expanded={props.overlayNav} onClick={props.toggleOverLay}>
 						<div></div>
 						<div></div>
 						<div></div>
