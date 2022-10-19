@@ -46,7 +46,7 @@ export const OverlayNav: React.FC<OverlayNav.Props> = (props: OverlayNav.Props) 
 		<span id={style.overlay} className={props.overlayNav ? style.open : ''}>
 			<span className={style.bg}>
 				<span>
-					<div onClick={props.toggleOverlay} className={style.xicon}>
+					<div aria-label='close' tabIndex={0} role='button' aria-expanded={true} onClick={props.toggleOverlay} className={style.xicon}>
 						<div></div>
 						<div></div>
 					</div>
