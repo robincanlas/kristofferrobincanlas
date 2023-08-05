@@ -3,7 +3,7 @@ import * as style from './style.css';
 import { Menu } from 'semantic-ui-react';
 import { navs } from 'app/constants';
 import { useEffect, useState } from 'react';
-import { useHistory, matchPath } from 'react-router-dom';
+import { useHistory, matchPath, useLocation } from 'react-router-dom';
 import { History } from 'history';
 
 export namespace Header {
@@ -15,6 +15,7 @@ export namespace Header {
 
 export const Header: React.FC<Header.Props> = (props: Header.Props) => { 
 	const history: History = useHistory();
+  const { pathname } = useLocation();
 	const openTag: string = '<';
 	const closeTag: string = '/>';
 	const name: string = ' robin ';
@@ -44,9 +45,9 @@ export const Header: React.FC<Header.Props> = (props: Header.Props) => {
 	};
 
 	useEffect(() => {
-		setUrl(history.location.pathname); // <-- call this on did mount
+		setUrl(pathname); // <-- call this on did mount
 		const historyUnlisten: Function = history.listen(() => {
-			setUrl(history.location.pathname);
+			setUrl(pathname);
 		});
 		window.addEventListener('scroll', onScroll, false);
 		
@@ -56,21 +57,23 @@ export const Header: React.FC<Header.Props> = (props: Header.Props) => {
 		};
 	}, []);
 
-	const isWorkDescriptionPage = !!matchPath(
-		history.location.pathname, 
-		'/work/:id'
-	);
+  const isWorkDescriptionPage = !!matchPath(pathname, {
+    path: '/work/:id',
+    exact: false,
+    strict: false
+  });
 
-	const isPhotoPage = !!matchPath(
-		history.location.pathname, 
-		'/photography'
-	);
-
+  const isPhotoPage = !!matchPath(pathname, {
+    path: '/photography',
+    exact: true,
+    strict: true
+  });
+  
 	return (
 		<header>
 			<Menu id={style.nav} className={`${isScrollUp ? style.unpinned : ''}`} text>
-				<span className={`${style.pattern} ${top ? '' : style['show-bg']}`}></span>
-				<span className={`${style.bg} ${top ? '' : style['show-bg']} ${isWorkDescriptionPage || isPhotoPage ? style['lights-off'] : ''}`}></span>
+				<span className={`${style.pattern} ${top ? '' : style['show-bg']}`} />
+				<span className={`${style.bg} ${top ? '' : style['show-bg']} ${isWorkDescriptionPage || isPhotoPage ? style['lights-off'] : ''}`} />
 				<Menu.Item tabIndex={0} className={style.name} onClick={() => history.push('/')} header>
 					<span className={style.tag}>{openTag}</span>
 					<span>{name}</span>
