@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as style from './style.css';
-import { Route, Switch, useHistory, matchPath } from 'react-router-dom';
+import { Route, Switch, useHistory, matchPath, useLocation } from 'react-router-dom';
 import { Header, Footer, OverlayNav } from 'app/components';
 import { 
 	HomePage, 
@@ -33,8 +33,9 @@ export const _App: React.FC<_App.Props> = ({
 	const history: History = useHistory();
 	const defaultTitle: string = 'Kristoffer Robin Canlas';
 	const [overlayNav, setOverlayNav] = React.useState(false);
-	
-	const changeTitle = () => {
+  const { pathname } = useLocation();
+
+  const changeTitle = () => {
 		const currentPath: string = history.location.pathname.split('/')[1].toUpperCase();
 		const title: string = currentPath === '' ? defaultTitle : `${defaultTitle} | ${currentPath}`;
 		document.title = title;
@@ -50,15 +51,17 @@ export const _App: React.FC<_App.Props> = ({
 		});
 	}, [history]);
 
-	const isWorkDescriptionPage = !!matchPath(
-		history.location.pathname, 
-		'/work/:id'
-	);
+  const isWorkDescriptionPage = !!matchPath(pathname, {
+    path: '/work/:id',
+    exact: false,
+    strict: false
+  });
 
-	const isPhotoPage = !!matchPath(
-		history.location.pathname, 
-		'/photography'
-	);
+  const isPhotoPage = !!matchPath(pathname, {
+    path: '/photography',
+    exact: true,
+    strict: true
+  });
 
 	return (
 		<React.Fragment>

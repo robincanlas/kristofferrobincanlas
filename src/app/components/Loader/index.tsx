@@ -6,12 +6,13 @@ export const Loader = () => {
 	const [lodingText, setLoadingText] = React.useState<string>('Loading...');
 
 	React.useEffect(() => {
-		setTimeout(() => {
+		const timeout = setTimeout(() => {
 			setLoadingText('Waking up the servers...');
-			setTimeout(() => {
-				setLoadingText('Servers are now waking up...');
-			}, 10000);
 		}, 10000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
 	}, []);
 
 	return(
