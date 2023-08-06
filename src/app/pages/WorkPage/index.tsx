@@ -39,7 +39,7 @@ const WorkPage: React.FC<Work.Props> = (props: Work.Props) => {
 		
 		return (
 			<Container id={style.work} fluid>
-				<React.Fragment>
+				<>
 					<Header className={style.header}>WORK</Header>
 					<span className={style.description}>A selection of my web development projects</span>
 					<span className={style.screenshots}>
@@ -71,7 +71,7 @@ const WorkPage: React.FC<Work.Props> = (props: Work.Props) => {
 							</span>
 						</div>
 					</span>
-				</React.Fragment>
+				</>
 			</Container>
 		);
 	};

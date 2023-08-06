@@ -17,7 +17,7 @@ export const Photo: React.FC<Photo.Props> = (props: Photo.Props) => {
 	};
 
 	return (
-		<React.Fragment>
+		<>
 			<span className='ttttt' ref={props.lastPhotoRef} onClick={() => openModal(props.photo)}>
 				<ProgressiveImage 
 					sizes='(max-width: 800px) 100vw, 800px'
@@ -29,6 +29,6 @@ export const Photo: React.FC<Photo.Props> = (props: Photo.Props) => {
 					`}
 				/> 
 			</span>
-		</React.Fragment>
+		</>
 	);
 };

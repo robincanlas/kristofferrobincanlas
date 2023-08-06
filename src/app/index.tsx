@@ -17,7 +17,7 @@ import { WorkActions } from './store/work/actions';
 import { PhotoActions } from './store/photography/actions';
 import { InformationActions } from './store/information/actions';
 
-export namespace _App {
+namespace _App {
 	export interface Props {
 		informationActions?: InformationActions;
 		workActions?: WorkActions;
@@ -25,7 +25,7 @@ export namespace _App {
 	}
 }
 
-export const _App: React.FC<_App.Props> = ({
+const _App: React.FC<_App.Props> = ({
 	informationActions = InformationActions,
 	workActions = WorkActions,
 	photoActions = PhotoActions
@@ -64,7 +64,7 @@ export const _App: React.FC<_App.Props> = ({
   });
 
 	return (
-		<React.Fragment>
+		<>
 			{/* <Cursor /> */}
 			<span className={`${style.bg} ${isWorkDescriptionPage || isPhotoPage ? style['lights-off'] : ''}`}></span>
 				<OverlayNav overlayNav={overlayNav} toggleOverlay={() => setOverlayNav(!overlayNav)} />
@@ -83,7 +83,7 @@ export const _App: React.FC<_App.Props> = ({
 					</span>
 					<Footer />
 			</span>
-		</React.Fragment>
+		</>
 	);
 };
 
@@ -95,7 +95,9 @@ const mapDispatchToProps = (dispatch: Dispatch): Pick<_App.Props, 'informationAc
 	photoActions: bindActionCreators(PhotoActions, dispatch) 
 });
 
-export const App: React.FC<_App.Props> = connect(
+const App: React.FC<_App.Props> = connect(
 	mapStateToProps,	
 	mapDispatchToProps
 )(_App);
+
+export default App;

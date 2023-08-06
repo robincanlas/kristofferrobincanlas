@@ -1,14 +1,14 @@
 const webpack = require('webpack');
-const package = require('./package.json');
 const path = require('path');
 const sourcePath = path.join(__dirname, './src');
 const outPath = path.join(__dirname, './build');
 
 // plugins
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = (env, option) => {
   const isProduction = option.mode === 'production';
@@ -24,6 +24,9 @@ module.exports = (env, option) => {
 
   return {
     mode: option.mode,
+    devServer: {
+      hot: true
+    },
     context: sourcePath,
     entry: {
       app: './index.tsx'
@@ -54,7 +57,7 @@ module.exports = (env, option) => {
           use: [!isProduction && {
               loader: 'babel-loader',
               options: {
-                plugins: ['react-hot-loader/babel']
+                plugins: ['react-refresh/babel']
               }
             },
             'ts-loader'
@@ -170,8 +173,9 @@ module.exports = (env, option) => {
       }),
       new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: 'async'
-      })
-    ],
+      }),
+      !isProduction && new ReactRefreshWebpackPlugin()
+    ].filter(Boolean),
     devServer: {
       // host: '0.0.0.0',
       host: 'localhost',

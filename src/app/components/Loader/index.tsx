@@ -16,7 +16,7 @@ export const Loader = () => {
 	}, []);
 
 	return(
-		<React.Fragment>
+		<>
 			<div id={style.container}>
 				<div className={style.body}>
 					<span>
@@ -38,6 +38,6 @@ export const Loader = () => {
 				</div>
 				<Header as='h3'>{lodingText}</Header>
 			</div> 			
-		</ React.Fragment>
+		</>
 	);
 };
