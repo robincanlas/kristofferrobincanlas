@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
-const sourcePath = path.join(__dirname, './src');
-const outPath = path.join(__dirname, './build');
+const sourcePath = path.join(__dirname, '../src');
+const outPath = path.join(__dirname, '../build');
 
 // plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -11,7 +11,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = (env, option) => {
-  const isProduction = option.mode === 'production';
   console.log(
     `
 		####### ##         ##       #####  ##   ##
@@ -33,10 +32,10 @@ module.exports = (env, option) => {
     },
     output: {
       // publicPath: '/', //<--- output path if using nodejs
-      publicPath: isProduction ? '/build/' : '/', //<--- output path for github
+      publicPath: '/build/', //<--- output path for github
       path: outPath,
-      filename: isProduction ? '[contenthash].js' : '[hash].js',
-      chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[hash].js'
+      filename: 'build/[contenthash].js',
+      chunkFilename: '[name].[contenthash].js'
     },
     resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
@@ -45,7 +44,7 @@ module.exports = (env, option) => {
       // (jsnext:main directs not usually distributable es6 format, but es6 sources)
       mainFields: ['module', 'browser', 'main'],
       alias: {
-        app: path.resolve(__dirname, 'src/app/')
+        app: path.resolve(__dirname, '../src/app/')
       }
     },
     module: {
@@ -54,14 +53,7 @@ module.exports = (env, option) => {
         {
           test: /\.ts(x?)$/,
           exclude: /node_modules/,
-          use: [!isProduction && {
-              loader: 'babel-loader',
-              options: {
-                plugins: ['react-refresh/babel']
-              }
-            },
-            'ts-loader'
-          ].filter(Boolean)
+          use: 'ts-loader'
         },
         {
           oneOf: [
@@ -81,15 +73,15 @@ module.exports = (env, option) => {
             {
               test: /\.css$/,
               use: [
-                isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                MiniCssExtractPlugin.loader,
                 {
                   loader: 'css-loader',
                   query: {
                     modules: true,
-                    sourceMap: !isProduction,
+                    sourceMap: false,
                     importLoaders: 1,
                     modules: {
-                      localIdentName: isProduction ? '[hash:base64:5]' : '[local]__[hash:base64:5]'
+                      localIdentName: '[hash:base64:5]'
                     }
                   }
                 },
@@ -106,7 +98,7 @@ module.exports = (env, option) => {
                       }),
                       require('postcss-reporter')(),
                       require('postcss-browser-reporter')({
-                        disabled: isProduction
+                        disabled: true
                       })
                     ]
                   }
@@ -123,7 +115,7 @@ module.exports = (env, option) => {
           loaders: [{
             loader: 'url-loader?limit=10000',
             options: {
-              outputPath: isProduction ? 'build/' : ''
+              outputPath: 'build/'
             }
           }]
         },
@@ -133,7 +125,7 @@ module.exports = (env, option) => {
           loaders: [{
             loader: 'file-loader',
             options: {
-              outputPath: isProduction ? 'build/' : '',
+              outputPath: 'build/',
             }
           }]
 
@@ -147,12 +139,11 @@ module.exports = (env, option) => {
           commons: {
             chunks: 'initial',
             minChunks: 2,
-            // filename: isProduction ? 'build/[name].js' : '[name].js'
           },
           vendors: {
             test: /[\\/]node_modules[\\/]/,
             chunks: 'all',
-            filename: isProduction ? 'build/vendor.[contenthash].js' : 'vendor.[hash].js',
+            filename: 'build/vendor.[contenthash].js',
             priority: -10
           }
         }
@@ -167,7 +158,6 @@ module.exports = (env, option) => {
       new CleanWebpackPlugin(),
       new MiniCssExtractPlugin({
         filename: 'build/[hash].css',
-        disable: !isProduction
       }),
       new HtmlWebpackPlugin({
         template: 'assets/index.html',
@@ -191,23 +181,9 @@ module.exports = (env, option) => {
       new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: 'async'
       }),
-      !isProduction && new ReactRefreshWebpackPlugin()
     ].filter(Boolean),
-    devServer: {
-      // host: '0.0.0.0',
-      host: 'localhost',
-      port: 8000,
-      contentBase: sourcePath,
-      hot: true,
-      inline: true,
-      historyApiFallback: {
-        disableDotRule: true
-      },
-      stats: 'minimal',
-      clientLogLevel: 'warning'
-    },
     // https://webpack.js.org/configuration/devtool/
-    devtool: isProduction ? 'build/hidden-source-map' : 'cheap-module-eval-source-map',
+    devtool: 'build/hidden-source-map',
     node: {
       // workaround for webpack-dev-server issue
       // https://github.com/webpack/webpack-dev-server/issues/60#issuecomment-103411179
