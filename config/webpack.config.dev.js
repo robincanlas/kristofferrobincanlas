@@ -1,17 +1,15 @@
 const webpack = require('webpack');
 const path = require('path');
-const sourcePath = path.join(__dirname, './src');
-const outPath = path.join(__dirname, './build');
+const sourcePath = path.join(__dirname, '../src');
+const outPath = path.join(__dirname, '../build');
 
 // plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = (env, option) => {
-  const isProduction = option.mode === 'production';
   console.log(
     `
 		####### ##         ##       #####  ##   ##
@@ -24,19 +22,15 @@ module.exports = (env, option) => {
 
   return {
     mode: option.mode,
-    devServer: {
-      hot: true
-    },
     context: sourcePath,
     entry: {
       'build/': './index.tsx'
     },
     output: {
-      // publicPath: '/', //<--- output path if using nodejs
-      publicPath: isProduction ? '/build/' : '/', //<--- output path for github
+      publicPath: '/', //<--- output path for github
       path: outPath,
-      filename: isProduction ? '[contenthash].js' : '[hash].js',
-      chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[hash].js'
+      filename: '[hash].js',
+      chunkFilename: '[name].[hash].js'
     },
     resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
@@ -45,7 +39,7 @@ module.exports = (env, option) => {
       // (jsnext:main directs not usually distributable es6 format, but es6 sources)
       mainFields: ['module', 'browser', 'main'],
       alias: {
-        app: path.resolve(__dirname, 'src/app/')
+        app: path.resolve(__dirname, '../src/app/')
       }
     },
     module: {
@@ -54,7 +48,7 @@ module.exports = (env, option) => {
         {
           test: /\.ts(x?)$/,
           exclude: /node_modules/,
-          use: [!isProduction && {
+          use: [{
               loader: 'babel-loader',
               options: {
                 plugins: ['react-refresh/babel']
@@ -81,15 +75,15 @@ module.exports = (env, option) => {
             {
               test: /\.css$/,
               use: [
-                isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                'style-loader',
                 {
                   loader: 'css-loader',
                   query: {
                     modules: true,
-                    sourceMap: !isProduction,
+                    sourceMap: true,
                     importLoaders: 1,
                     modules: {
-                      localIdentName: isProduction ? '[hash:base64:5]' : '[local]__[hash:base64:5]'
+                      localIdentName: '[local]__[hash:base64:5]'
                     }
                   }
                 },
@@ -105,9 +99,7 @@ module.exports = (env, option) => {
                         stage: 2
                       }),
                       require('postcss-reporter')(),
-                      require('postcss-browser-reporter')({
-                        disabled: isProduction
-                      })
+                      require('postcss-browser-reporter')()
                     ]
                   }
                 }
@@ -117,27 +109,8 @@ module.exports = (env, option) => {
         },
         // static assets
         { test: /\.html$/, use: 'html-loader' },
-        { 
-          test: /\.(a?png|svg)$/, 
-          // use: 'url-loader?limit=10000',
-          loaders: [{
-            loader: 'url-loader?limit=10000',
-            options: {
-              outputPath: isProduction ? 'build/' : ''
-            }
-          }]
-        },
-        {
-          test: /\.(jpe?g|gif|bmp|mp3|mp4|ogg|wav|eot|ttf|woff|woff2)$/,
-          // use: 'file-loader',
-          loaders: [{
-            loader: 'file-loader',
-            options: {
-              outputPath: isProduction ? 'build/' : '',
-            }
-          }]
-
-        }
+        { test: /\.(a?png|svg)$/, use: 'url-loader?limit=10000' },
+        { test: /\.(jpe?g|gif|bmp|mp3|mp4|ogg|wav|eot|ttf|woff|woff2)$/, use: 'file-loader' }
       ]
     },
     optimization: {
@@ -147,12 +120,11 @@ module.exports = (env, option) => {
           commons: {
             chunks: 'initial',
             minChunks: 2,
-            // filename: isProduction ? 'build/[name].js' : '[name].js'
           },
           vendors: {
             test: /[\\/]node_modules[\\/]/,
             chunks: 'all',
-            filename: isProduction ? 'build/vendor.[contenthash].js' : 'vendor.[hash].js',
+            filename: 'vendor.[hash].js',
             priority: -10
           }
         }
@@ -165,10 +137,6 @@ module.exports = (env, option) => {
         DEBUG: false
       }),
       new CleanWebpackPlugin(),
-      new MiniCssExtractPlugin({
-        filename: 'build/[hash].css',
-        disable: !isProduction
-      }),
       new HtmlWebpackPlugin({
         template: 'assets/index.html',
         minify: {
@@ -182,16 +150,11 @@ module.exports = (env, option) => {
         append: {
           head: `<script src="//cdn.polyfill.io/v3/polyfill.min.js"></script>`
         }
-        // meta: {
-        //   title: 'Kristoffer Robin Canlas',
-        //   description: package.description,
-        //   keywords: Array.isArray(package.keywords) ? package.keywords.join(',') : undefined
-        // }
       }),
       new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: 'async'
       }),
-      !isProduction && new ReactRefreshWebpackPlugin()
+      new ReactRefreshWebpackPlugin()
     ].filter(Boolean),
     devServer: {
       // host: '0.0.0.0',
@@ -207,7 +170,7 @@ module.exports = (env, option) => {
       clientLogLevel: 'warning'
     },
     // https://webpack.js.org/configuration/devtool/
-    devtool: isProduction ? 'build/hidden-source-map' : 'cheap-module-eval-source-map',
+    devtool: 'cheap-module-eval-source-map',
     node: {
       // workaround for webpack-dev-server issue
       // https://github.com/webpack/webpack-dev-server/issues/60#issuecomment-103411179

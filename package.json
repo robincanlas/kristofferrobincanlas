@@ -5,8 +5,8 @@
   "description": "I'm Kristoffer Robin Canlas, a developer based in Quezon City, Philippines. I have almost 6 years of experience as a Web Developer. My passion is coding and learning new technologies.",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf -rm build && webpack --mode=production",
-    "start": "webpack-dev-server --mode=development --progress --color --port 8000 --open",
+    "build": "rimraf -rm build && webpack --config config/webpack.config.prod.js --mode=production",
+    "start": "webpack-dev-server --config config/webpack.config.dev.js --mode=development --progress --color --port 8000 --open",
     "test:coverage": "jest --coverage --verbose --no-cache --config jest.config.js",
     "test": "jest --verbose --no-cache --config jest.config.js"
   },
