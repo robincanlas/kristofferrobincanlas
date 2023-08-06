@@ -1,13 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
-const sourcePath = path.join(__dirname, '../src');
-const outPath = path.join(__dirname, '../build');
+const outPath = path.join(__dirname, '../dist');
 
 // plugins
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -16,11 +12,10 @@ module.exports = {
   //   'build/': './index.tsx'
   // },
   output: {
-    // publicPath: '/', //<--- output path if using nodejs
-    publicPath: '/', //<--- output path for github
+    publicPath: '/', //<--- index.html source file path
     path: outPath,
     filename: 'build/[contenthash].js',
-    chunkFilename: '[name].[contenthash].js'
+    chunkFilename: 'build/[name].[contenthash].js'
   },
   // resolve: {
   //   // Add '.ts' and '.tsx' as resolvable extensions.
@@ -34,7 +29,6 @@ module.exports = {
   // },
   module: {
     rules: [
-      // .ts, .tsx
       {
         test: /\.ts(x?)$/,
         exclude: /node_modules/,

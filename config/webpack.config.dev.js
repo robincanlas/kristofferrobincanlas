@@ -1,12 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
 const sourcePath = path.join(__dirname, '../src');
-const outPath = path.join(__dirname, '../build');
+const outPath = path.join(__dirname, '../dist');
 
 // plugins
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
@@ -16,7 +13,7 @@ module.exports = {
   //   'build/': './index.tsx'
   // },
   output: {
-    publicPath: '/', //<--- index.html src output path for github
+    publicPath: '/', //<--- output path for github
     path: outPath,
     filename: '[hash].js',
     chunkFilename: '[name].[hash].js'

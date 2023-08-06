@@ -9,7 +9,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   context: sourcePath,
   entry: {
-    'build/': './index.tsx'
+    app: './index.tsx'
   },
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
