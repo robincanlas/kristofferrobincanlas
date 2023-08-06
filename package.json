@@ -2,11 +2,11 @@
   "name": "kristoffer-robin-canlas",
   "homepage": "https://robincanlas.github.io",
   "version": "1.0.0",
-  "description": "I'm Kristoffer Robin Canlas, a developer based in Quezon City, Philippines. I have almost 6 years of experience as a Web Developer. My passion is coding and learning new technologies.",
+  "description": "Portfolio Webapp",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf -rm build && webpack --config config/webpack.config.prod.js --mode=production",
-    "start": "webpack-dev-server --config config/webpack.config.dev.js --mode=development --progress --color --port 8000 --open",
+    "build": "rimraf -rm build && webpack --config config/webpack.config.js --mode=production",
+    "start": "webpack-dev-server --config config/webpack.config.js --mode=development --progress --color --port 8000 --open",
     "test:coverage": "jest --coverage --verbose --no-cache --config jest.config.js",
     "test": "jest --verbose --no-cache --config jest.config.js"
   },
@@ -63,7 +63,8 @@
     "url-loader": "^4.1.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.9.0"
   },
   "dependencies": {
     "@types/react": "^18.2.18",
