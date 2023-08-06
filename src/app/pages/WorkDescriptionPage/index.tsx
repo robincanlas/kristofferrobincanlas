@@ -66,10 +66,10 @@ const DescriptionComponent: React.FC<DescriptionComponent.Props> = (props: Descr
 							<span className={style.spacer}></span>
 							{props.description!.next &&
 								<span onClick={() => nextPage(props.description!.next)}>
-									<React.Fragment>
+									<>
 										Next Project 
 										<Icon size='large' name='angle double right' />
-									</React.Fragment>
+									</>
 								</span>
 							}
 						</div>

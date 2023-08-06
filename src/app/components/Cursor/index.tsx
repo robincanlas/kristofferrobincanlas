@@ -25,9 +25,9 @@ export const Cursor: React.FC = () => {
 	}, [cursorRef, dotRef]);
 
 	return (
-		<React.Fragment>
+		<>
 			<span ref={cursorRef} className={style.cursor}></span>
 			<span ref={dotRef} className={style.dot}></span>
-		</React.Fragment>
+		</>
 	);
 };

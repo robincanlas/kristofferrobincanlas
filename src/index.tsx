@@ -1,7 +1,7 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { App } from './app';
+import App from './app';
 import { Provider } from 'react-redux';
 import { configureStore } from 'app/store';
 
@@ -19,13 +19,14 @@ import 'semantic-ui-css/components/dimmer.min.css';
 import 'normalize.css';
 import './default.css';
 
+// const App = React.lazy(() => import('./app'));
 const store = configureStore();
-
-ReactDOM.render(
+const rootElement: Element | null = document.getElementById('root');
+const root = createRoot(rootElement!);
+root.render(
 	<Provider store={store}>
 		<BrowserRouter>
 			<App />
 		</BrowserRouter>
-	</Provider>,
-	document.getElementById('root')
+	</Provider>
 );
