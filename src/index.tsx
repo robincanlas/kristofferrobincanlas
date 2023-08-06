@@ -19,7 +19,6 @@ import 'semantic-ui-css/components/dimmer.min.css';
 import 'normalize.css';
 import './default.css';
 
-// const App = React.lazy(() => import('./app'));
 const store = configureStore();
 const rootElement: Element | null = document.getElementById('root');
 const root = createRoot(rootElement!);

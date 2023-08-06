@@ -174,8 +174,8 @@ module.exports = (env, option) => {
       new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: 'async'
       }),
-    !isProduction && new ReactRefreshWebpackPlugin()
-    ],
+      !isProduction && new ReactRefreshWebpackPlugin()
+    ].filter(Boolean),
     devServer: {
       // host: '0.0.0.0',
       host: 'localhost',
