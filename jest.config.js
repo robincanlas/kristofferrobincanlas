@@ -8,13 +8,10 @@ const {
 
 module.exports = {
   preset: 'ts-jest',
-  globals: {
-    "ts-jest": {
-      "tsconfig": "<rootDir>/tsconfig.json"
-    }
-  },
+  coverageDirectory: 'coverage',
+  testEnvironment: 'jsdom',
   moduleDirectories: [
-    ".",
+    __dirname,
     "src",
     "node_modules"
   ],
@@ -29,10 +26,13 @@ module.exports = {
     '^@tests/(.*)$': resolve(__dirname, './src/tests/$1'),
     ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css"
   },
-  snapshotSerializers: [
-    "enzyme-to-json/serializer"
-  ],
-  setupFilesAfterEnv: [
-    "<rootDir>/enzyme-react-16-config.js"
-  ]
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  transform: {
+    "\\.[jt]sx?$": [
+      "ts-jest", {
+        "tsconfig": "<rootDir>/tsconfig.json"
+      }
+    ]
+  },
+  transformIgnorePatterns: ['<rootDir>/node_modules/']
 };
