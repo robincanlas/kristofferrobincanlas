@@ -31,3 +31,4 @@ steps:
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/dist/
     artifact: WebApp
+  displayName: 'Publish build artifact'
