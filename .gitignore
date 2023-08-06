@@ -1,4 +1,12 @@
+# npm modules
 node_modules
+
+# build folder
 ./build
 build
+
+# env file
 .env
+
+# test coverage
+coverage

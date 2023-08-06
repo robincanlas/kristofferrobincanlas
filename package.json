@@ -7,6 +7,7 @@
   "scripts": {
     "build": "rimraf -rm build && webpack --mode=production",
     "start": "webpack-dev-server --mode=development --progress --color --port 8000 --open",
+    "test:coverage": "jest --coverage --verbose --no-cache --config jest.config.js",
     "test": "jest --verbose --no-cache --config jest.config.js"
   },
   "keywords": [
