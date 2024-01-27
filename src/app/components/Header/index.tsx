@@ -19,13 +19,12 @@ export const Header: React.FC<Header.Props> = (props: Header.Props) => {
 	const openTag: string = '<';
 	const closeTag: string = '/>';
 	const name: string = ' robin ';
-	const [url, setUrl] = useState('/');
 	const [isScrollUp, setScrollUp] = useState(false);
 	const [top, setPosition] = useState(true);
 	let lastScrollTop = 0;
 
 	const onScroll = () => {
-		let st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+		let st = window.scrollY || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
 		if (st === 0) {
 			// scroll already at the top 
 			setPosition(true);
@@ -45,14 +44,9 @@ export const Header: React.FC<Header.Props> = (props: Header.Props) => {
 	};
 
 	useEffect(() => {
-		setUrl(pathname); // <-- call this on did mount
-		const historyUnlisten: Function = history.listen(() => {
-			setUrl(pathname);
-		});
 		window.addEventListener('scroll', onScroll, false);
 		
 		return () => {
-			historyUnlisten();
 			window.removeEventListener('scroll', onScroll);
 		};
 	}, []);
@@ -84,7 +78,7 @@ export const Header: React.FC<Header.Props> = (props: Header.Props) => {
 						<Menu.Item
 							key={nav.name}
 							name={nav.name}
-							className={nav.url === url ? style.active : ''}
+							className={nav.url === pathname ? style.active : ''}
 							onClick={() => history.push(nav.url)}
 						/>
 					))}
