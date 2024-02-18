@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Models } from 'app/models';
-import { CreateJS, CSS, HTML5, Javascript, ReactJS, Redux, Typescript, Github, Heroku, SemanticUI, AngularJS, NodeJS } from 'app/components/SVGIcons';
+import { CreateJS, CSS, HTML5, Javascript, ReactJS, Redux, Typescript, Github, Heroku, SemanticUI, AngularJS, NodeJS, AzureDevOps, MongoDb } from 'app/components/SVGIcons';
 
 export const assetsPath: string =  '../../assets';
 export interface Icon { [key: string]: JSX.Element; }
@@ -35,8 +35,10 @@ export const skills: Models.Skill[] = [
 	{ name: 'redux', title: 'Redux' },
 	{ name: 'createjs', title: 'CreateJS' },
 	{ name: 'semanticui', title: 'Semantic UI React' },
-	{ name: 'heroku', title: 'Heroku' },
-	{ name: 'github', title: 'Github' }
+	{ name: 'mongodb', title: 'MongoDB' },
+	{ name: 'github', title: 'Github' },
+	{ name: 'azuredevops', title: 'Azure DevOps' },
+	{ name: 'nodejs', title: 'NodeJS' },
 ];
 
 export const svgIcons: Icon  = {
@@ -51,7 +53,9 @@ export const svgIcons: Icon  = {
 	'heroku': <Heroku />,
 	'semanticui': <SemanticUI />,
 	'angularjs': <AngularJS />,
-	'nodejs': <NodeJS />
+	'nodejs': <NodeJS />,
+  'azuredevops': <AzureDevOps />,
+  'mongodb': <MongoDb />,
 };
 
 export enum ActionTypes {

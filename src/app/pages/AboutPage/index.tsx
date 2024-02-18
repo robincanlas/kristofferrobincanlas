@@ -20,7 +20,7 @@ export const AboutPage: React.FC<AboutPage.Props> = (props: AboutPage.Props) => 
       <Message className={style.message}>
         <span><Header as='h2'>Hey there!</Header></span>
         <p>
-          I am Kristoffer Robin Canlas, a software engineer from Quezon City, Philippines, with nearly {yearsOfExperience} years of experience in web development. Coding is my passion, and I am constantly eager to explore new technologies and enhance my skills.
+          I am Kristoffer Robin Canlas, a Senior Software Engineer from Quezon City, Philippines, with nearly {yearsOfExperience} years of experience in web development. Coding is my passion, and I am constantly eager to explore new technologies and enhance my skills.
         </p>
       </Message>
       <span className={style.segment}>

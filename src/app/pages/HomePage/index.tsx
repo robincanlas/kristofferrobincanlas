@@ -14,7 +14,7 @@ export const HomePage: React.FC<HomePage.Props> = (props: HomePage.Props) => {
 			<span className={style.intro}>
 				<span className={style.text}>
 					<p>Kristoffer Robin Canlas</p>
-					<p>Web Developer</p>
+					<p>Senior Software Engineer</p>
 				</span>
 				<span aria-hidden='true' className={style.picture}>
 					<span>
