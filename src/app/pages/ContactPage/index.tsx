@@ -30,14 +30,14 @@ export const _ContactPage: React.FC<_ContactPage.Props> = ({
 				</Header>
 				<span>
 					<p>
-						I'd love to hear from you! I'm currently available for freelance projects &nbsp;
+           I'm available for freelance projects &nbsp;  
 					</p>
 					<p className={`${information.isEmployed ? style.linethru : ''}`}>
-						and interested in full-time position.
+            and interested in full-time positions.
 					</p>
 				</span>
 				<p>
-					Here's how you can reach me: 
+          Reach out to me using the following contact information:
 				</p>
 				<span className={style.details}>
 					<span>
