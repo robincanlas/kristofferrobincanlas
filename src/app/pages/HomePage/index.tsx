@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as style from './style.css';
+import style from './style.css';
 import { Container } from 'semantic-ui-react';
 import { Avatar } from 'app/components';
 

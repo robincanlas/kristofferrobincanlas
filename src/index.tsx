@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './app';
 import { Provider } from 'react-redux';
-import { configureStore } from 'app/store';
+import { configureStore } from './app/store';
 
 import 'semantic-ui-css/components/reset.min.css';
 import 'semantic-ui-css/components/site.min.css';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as style from './style.css';
+import style from './style.css';
 import { Container, Header, Icon } from 'semantic-ui-react';
 import { RootState } from 'app/store';
 import { connect } from 'react-redux';
