@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as style from './style.css';
+import style from './style.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Models } from 'app/models';
 import { Header, Icon } from 'semantic-ui-react';

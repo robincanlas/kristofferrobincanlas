@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as style from './style.css';
+import style from './style.css';
 
 export const Cursor: React.FC = () => {
 	const cursorRef: React.RefObject<HTMLSpanElement> = React.createRef();

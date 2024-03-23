@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as style from './style.css';
+import style from './style.css';
 import { Header } from 'semantic-ui-react';
 import { navs } from 'app/constants';
 import { useEffect } from 'react';

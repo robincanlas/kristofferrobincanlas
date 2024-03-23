@@ -8,26 +8,12 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 
 module.exports = {
   mode: 'development',
-  // context: sourcePath,
-  // entry: {
-  //   'build/': './index.tsx'
-  // },
   output: {
     publicPath: '/', //<--- output path for github
     path: outPath,
-    filename: '[hash].js',
+    filename: '[name].js',
     chunkFilename: '[name].[hash].js'
   },
-  // resolve: {
-  //   // Add '.ts' and '.tsx' as resolvable extensions.
-  //   extensions: [".js", ".ts", ".tsx"],
-  //   // Fix webpack's default behavior to not load packages with jsnext:main module
-  //   // (jsnext:main directs not usually distributable es6 format, but es6 sources)
-  //   mainFields: ['module', 'browser', 'main'],
-  //   alias: {
-  //     app: path.resolve(__dirname, '../src/app/')
-  //   }
-  // },
   module: {
     rules: [
       // .ts, .tsx
@@ -64,7 +50,7 @@ module.exports = {
               'style-loader',
               {
                 loader: 'css-loader',
-                query: {
+                options: {
                   modules: true,
                   sourceMap: true,
                   importLoaders: 1,
@@ -76,17 +62,19 @@ module.exports = {
               {
                 loader: 'postcss-loader',
                 options: {
-                  ident: 'postcss',
-                  plugins: [
-                    require('postcss-import')({ addDependencyTo: webpack }),
-                    require('postcss-url')(),
-                    require('postcss-preset-env')({
-                      /* use stage 2 features (defaults) */
-                      stage: 2
-                    }),
-                    require('postcss-reporter')(),
-                    require('postcss-browser-reporter')()
-                  ]
+                  postcssOptions: {
+                    ident: 'postcss',
+                    plugins: [
+                      require('postcss-import')({ addDependencyTo: webpack }),
+                      require('postcss-url')(),
+                      require('postcss-preset-env')({
+                        /* use stage 2 features (defaults) */
+                        stage: 2
+                      }),
+                      require('postcss-reporter')(),
+                      require('postcss-browser-reporter')()
+                    ]
+                  }
                 }
               }
             ]
@@ -95,13 +83,14 @@ module.exports = {
       },
       // static assets
       { test: /\.html$/, use: 'html-loader' },
-      { test: /\.(a?png|svg)$/, use: 'url-loader?limit=10000' },
-      { test: /\.(jpe?g|gif|bmp|mp3|mp4|ogg|wav|eot|ttf|woff|woff2)$/, use: 'file-loader' }
+      {
+        test: /\.(jpe?g|svg|png|gif|bmp|mp3|mp4|ogg|wav|ico|eot|ttf|woff|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
+        type: 'asset/resource',
+      }
     ]
   },
   optimization: {
     splitChunks: {
-      name: true,
       cacheGroups: {
         commons: {
           chunks: 'initial',
@@ -122,37 +111,23 @@ module.exports = {
       NODE_ENV: 'development',
       DEBUG: false
     }),
-    // new CleanWebpackPlugin(),
-    // new HtmlWebpackPlugin({
-    //   template: 'assets/index.html',
-    //   minify: {
-    //     minifyJS: true,
-    //     minifyCSS: true,
-    //     removeComments: true,
-    //     useShortDoctype: true,
-    //     collapseWhitespace: true,
-    //     collapseInlineTagWhitespace: true
-    //   },
-    //   append: {
-    //     head: `<script src="//cdn.polyfill.io/v3/polyfill.min.js"></script>`
-    //   }
-    // }),
-    // new ScriptExtHtmlWebpackPlugin({
-    //   defaultAttribute: 'async'
-    // }),
     new ReactRefreshWebpackPlugin()
   ].filter(Boolean),
   devServer: {
     // host: '0.0.0.0',
     host: 'localhost',
     port: 8000,
-    contentBase: sourcePath,
     hot: true,
-    inline: true,
+    // inline: true,
     historyApiFallback: {
       disableDotRule: true
     },
-    stats: 'minimal',
-    clientLogLevel: 'warning'
+    devMiddleware: {
+      stats: 'minimal'
+    },
+    client: {
+      logging: 'warn'
+    },
+    static: sourcePath
   },
 };
