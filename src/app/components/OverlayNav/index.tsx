@@ -2,9 +2,8 @@ import * as React from 'react';
 import * as style from './style.css';
 import { Header } from 'semantic-ui-react';
 import { navs } from 'app/constants';
-import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { History } from 'history';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export namespace OverlayNav {
 	export interface Props {
@@ -15,21 +14,11 @@ export namespace OverlayNav {
 }
 
 export const OverlayNav: React.FC<OverlayNav.Props> = (props: OverlayNav.Props) => { 
-	const [url, setUrl] = useState('/');
-	const history: History = useHistory();
-
-	useEffect(() => {
-		setUrl(history.location.pathname); // <-- call this on did mount
-		const historyUnlisten: Function = history.listen(() => {
-			setUrl(history.location.pathname);
-		});
-		return() => {
-			historyUnlisten();
-		};
-	}, []);
+	const navigate = useNavigate();
+  const { pathname: url } = useLocation();
 
 	const changeUrl = (nav: string) => {
-		history.push(nav);
+		navigate(nav);
 		props.toggleOverlay();
 	};
 

@@ -7,23 +7,19 @@ import axios, { AxiosResponse } from 'axios';
 
 type Thunk = ThunkAction<void, {}, {}, AnyAction>;
 
-export namespace InformationActions {
-	export const get = (): Thunk => {
-		const request = createAction(ActionTypes.GET_INFORMATION_REQUEST);
-		const success = createAction<Models.Information>(ActionTypes.GET_INFORMATION_SUCCESS);
-		const failure = createAction<any>(ActionTypes.GET_INFORMATION_FAILED);
+export const getInformation = (): Thunk => {
+  const request = createAction(ActionTypes.GET_INFORMATION_REQUEST);
+  const success = createAction<Models.Information>(ActionTypes.GET_INFORMATION_SUCCESS);
+  const failure = createAction<any>(ActionTypes.GET_INFORMATION_FAILED);
 
-		return (dispatch: ThunkDispatch<{}, {}, AnyAction>): void => {
-			dispatch(request());
-			axios.get(endPoint.information)
-				.then((response: AxiosResponse<Models.Information>) => {
-					dispatch(success(response.data));
-				})
-				.catch(error => {
-					dispatch(failure(error.data));
-				});
-		};
-	};
-}
-
-export type InformationActions = typeof InformationActions;
+  return (dispatch: ThunkDispatch<{}, {}, AnyAction>): void => {
+    dispatch(request());
+    axios.get(endPoint.information)
+      .then((response: AxiosResponse<Models.Information>) => {
+        dispatch(success(response.data));
+      })
+      .catch(error => {
+        dispatch(failure(error.data));
+      });
+  };
+};

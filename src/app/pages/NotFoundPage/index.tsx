@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as style from './style.css';
 import { Container, Header, Button, Message } from 'semantic-ui-react';
-import { useHistory } from 'react-router-dom';
-import { History } from 'history';
+import { useNavigate } from 'react-router-dom';
 
 export const NotFoundPage: React.FC<{}> = (props: {}) => {
-	const history: History = useHistory();
+	const navigate = useNavigate();
+  
 	return (
 		<Container>
 			<span id={style.wrapper}>
@@ -15,7 +15,7 @@ export const NotFoundPage: React.FC<{}> = (props: {}) => {
 					<Header className={style.big}>WANDER ARE LOST</Header>
 					<Header>But you're definitely not supposed to be here.</Header>
 				</Message>
-				<Button onClick={() => history.push('/')} color='black' >Go Home</Button>
+				<Button onClick={() => navigate('/')} color='black' >Go Home</Button>
 			</span>
 		</Container>
 	);

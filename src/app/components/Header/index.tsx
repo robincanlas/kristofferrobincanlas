@@ -3,8 +3,8 @@ import * as style from './style.css';
 import { Menu } from 'semantic-ui-react';
 import { navs } from 'app/constants';
 import { useEffect, useState } from 'react';
-import { useHistory, matchPath, useLocation } from 'react-router-dom';
-import { History } from 'history';
+import { useNavigate, useLocation } from 'react-router-dom';
+import useLightsOff from 'app/hooks/useLightsOff';
 
 export namespace Header {
 	export interface Props {
@@ -14,7 +14,8 @@ export namespace Header {
 }
 
 export const Header: React.FC<Header.Props> = (props: Header.Props) => { 
-	const history: History = useHistory();
+  const lightsOff = useLightsOff();
+	const navigate = useNavigate();
   const { pathname } = useLocation();
 	const openTag: string = '<';
 	const closeTag: string = '/>';
@@ -51,24 +52,12 @@ export const Header: React.FC<Header.Props> = (props: Header.Props) => {
 		};
 	}, []);
 
-  const isWorkDescriptionPage = !!matchPath(pathname, {
-    path: '/work/:id',
-    exact: false,
-    strict: false
-  });
-
-  const isPhotoPage = !!matchPath(pathname, {
-    path: '/photography',
-    exact: true,
-    strict: true
-  });
-  
 	return (
 		<header>
 			<Menu id={style.nav} className={`${isScrollUp ? style.unpinned : ''}`} text>
 				<span className={`${style.pattern} ${top ? '' : style['show-bg']}`} />
-				<span className={`${style.bg} ${top ? '' : style['show-bg']} ${isWorkDescriptionPage || isPhotoPage ? style['lights-off'] : ''}`} />
-				<Menu.Item tabIndex={0} className={style.name} onClick={() => history.push('/')} header>
+				<span className={`${style.bg} ${top ? '' : style['show-bg']} ${lightsOff ? style['lights-off'] : ''}`} />
+				<Menu.Item tabIndex={0} className={style.name} onClick={() => navigate('/')} header>
 					<span className={style.tag}>{openTag}</span>
 					<span>{name}</span>
 					<span className={style.tag}>{closeTag}</span>
@@ -79,7 +68,7 @@ export const Header: React.FC<Header.Props> = (props: Header.Props) => {
 							key={nav.name}
 							name={nav.name}
 							className={nav.url === pathname ? style.active : ''}
-							onClick={() => history.push(nav.url)}
+							onClick={() => navigate(nav.url)}
 						/>
 					))}
 				</Menu.Menu>

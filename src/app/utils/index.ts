@@ -1,5 +1,3 @@
-import { createBrowserHistory } from 'history';
-
 export function omit<T extends object, K extends keyof T>(target: T, ...omitKeys: K[]): Omit<T, K> {
 	return (Object.keys(target) as K[]).reduce(
 		(res, key) => {
@@ -12,6 +10,6 @@ export function omit<T extends object, K extends keyof T>(target: T, ...omitKeys
 	);
 }
 
-export const history = createBrowserHistory({
-	basename: process.env.PUBLIC_URL
-});
+// export const history = createBrowserHistory({
+// 	basename: process.env.PUBLIC_URL
+// });

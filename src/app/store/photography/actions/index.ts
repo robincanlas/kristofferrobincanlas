@@ -7,23 +7,21 @@ import { ActionTypes, endPoint } from 'app/constants';
 
 type Thunk = ThunkAction<void, {}, {}, AnyAction>;
 
-export namespace PhotoActions {
-	export const getPhotos = (): Thunk => {
-		const request = createAction(ActionTypes.GET_PHOTOS_REQUEST);
-		const success = createAction<Models.Photo[]>(ActionTypes.GET_PHOTOS_SUCCESS);
-		const failure = createAction<any>(ActionTypes.GET_PHOTOS_FAILED);
+export type AppDispatch = ThunkDispatch<{}, {}, AnyAction>;
 
-		return (dispatch: ThunkDispatch<{}, {}, AnyAction>): void => {
-			dispatch(request());
-			Axios.get(endPoint.photos)
-				.then(response => {
-					dispatch(success(response.data));
-				})
-				.catch(error => {
-					dispatch(failure(error.data));
-				});
-		};
-	};
-}
+export const getPhotos = (): Thunk => {
+  const request = createAction(ActionTypes.GET_PHOTOS_REQUEST);
+  const success = createAction<Models.Photo[]>(ActionTypes.GET_PHOTOS_SUCCESS);
+  const failure = createAction<any>(ActionTypes.GET_PHOTOS_FAILED);
 
-export type PhotoActions = typeof PhotoActions;
+  return (dispatch: ThunkDispatch<{}, {}, AnyAction>): void => {
+    dispatch(request());
+    Axios.get(endPoint.photos)
+      .then(response => {
+        dispatch(success(response.data));
+      })
+      .catch(error => {
+        dispatch(failure(error.data));
+      });
+  };
+};
