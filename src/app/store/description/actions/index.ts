@@ -7,23 +7,21 @@ import Axios from 'axios';
 
 type Thunk = ThunkAction<void, {}, {}, AnyAction>;
 
-export namespace DescriptionActions {
-	export const getDescription = (id: string): Thunk => {
-		const request = createAction(ActionTypes.GET_DESCRIPTION_REQUEST);
-		const success = createAction<Models.Description>(ActionTypes.GET_DESCRIPTION_SUCCESS);
-		const failure = createAction<any>(ActionTypes.GET_DESCRIPTION_FAILED);
+export type AppDispatch = ThunkDispatch<{}, {}, AnyAction>;
 
-		return (dispatch: ThunkDispatch<{}, {}, AnyAction>): void => {
-			dispatch(request());
-			Axios.get(`${endPoint.work}/${id}`)
-				.then(response => {
-					dispatch(success(response.data));
-				})
-				.catch(error => {
-					dispatch(failure(error.data));
-				});
-		};
-	};
-}
+export const getDescription = (id: string): Thunk => {
+  const request = createAction(ActionTypes.GET_DESCRIPTION_REQUEST);
+  const success = createAction<Models.Description>(ActionTypes.GET_DESCRIPTION_SUCCESS);
+  const failure = createAction<any>(ActionTypes.GET_DESCRIPTION_FAILED);
 
-export type DescriptionActions = typeof DescriptionActions;
+  return (dispatch: ThunkDispatch<{}, {}, AnyAction>): void => {
+    dispatch(request());
+    Axios.get(`${endPoint.work}/${id}`)
+      .then(response => {
+        dispatch(success(response.data));
+      })
+      .catch(error => {
+        dispatch(failure(error.data));
+      });
+  };
+};

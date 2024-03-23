@@ -1,23 +1,15 @@
 import * as React from 'react';
 import * as style from './style.css';
-import { RouteComponentProps, useParams, useHistory } from 'react-router-dom';
-import { History } from 'history';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Models } from 'app/models';
 import { Header, Icon } from 'semantic-ui-react';
 import { svgIcons, cloudinaryUrl, cloudinarySizes } from 'app/constants';
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
-import { DescriptionActions } from 'app/store/description/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch, getDescription } from 'app/store/description/actions';
 import { RootState } from 'app/store';
 import { Loader, ProgressiveImage } from 'app/components';
 
-export namespace DescriptionComponent {
-	export interface Props extends RouteComponentProps {
-		description: Models.Description | null;
-		isLoading: boolean;
-		actions: DescriptionActions;
-	}
-
+export namespace WorkDescriptionPage {
 	export interface Params {
 		id: string;
 	}
@@ -28,44 +20,48 @@ export namespace DescriptionComponent {
 	}
 }
 
-const DescriptionComponent: React.FC<DescriptionComponent.Props> = (props: DescriptionComponent.Props) => {
-	const history: History = useHistory();
-	const { id } = useParams<DescriptionComponent.Params>();
+export const WorkDescriptionPage: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const description = useSelector((state: RootState) => state.description.description);
+  const isLoading = useSelector((state: RootState) => state.description.isLoading);
+
+	const navigate = useNavigate();
+	const { id = '' } = useParams();
 
 	React.useEffect(() => {
-		props.actions.getDescription(id);
+    dispatch(getDescription(id))
 	}, [id]);
 
 	const previousPage = (prevId: string | null) => {
 		if (prevId) {
-			history.push(prevId);
+			navigate(`/work/${prevId}`);
 		} else {
-			history.push('/work');
+			navigate('/work');
 		}
 	};
 
 	const nextPage = (nextId: string | null) => {
 		if (nextId) {
-			history.push(nextId);
+			navigate(`/work/${nextId}`);
 		}
 	};
 	
 	const render = (): JSX.Element => {
-		if (props.isLoading) {
+		if (isLoading) {
 			return <Loader />;
 		} else {
-			if (props.description && props.description.current) {
-				const { current }: Models.Description = props.description;
+			if (description && description.current) {
+				const { current }: Models.Description = description;
 				return (
 					<div id={style.container}>
 						<div className={style.nav}>
-							<span onClick={() => previousPage(props.description!.previous)}>
+							<span onClick={() => previousPage(description!.previous)}>
 								<Icon size='large' name='angle double left' /> 
-								{props.description!.previous ? 'Previous Project'	: 'Back to Work Page' }
+								{description!.previous ? 'Previous Project'	: 'Back to Work Page' }
 							</span>
 							<span className={style.spacer}></span>
-							{props.description!.next &&
-								<span onClick={() => nextPage(props.description!.next)}>
+							{description!.next &&
+								<span onClick={() => nextPage(description!.next)}>
 									<>
 										Next Project 
 										<Icon size='large' name='angle double right' />
@@ -139,17 +135,3 @@ const DescriptionComponent: React.FC<DescriptionComponent.Props> = (props: Descr
 
 	return render();
 };
-
-const mapStateToProps = (state: RootState): Pick<DescriptionComponent.Props, 'description' | 'isLoading'> => {
-	return {
-		description: state.description.description,
-		isLoading: state.description.isLoading
-	};
-};
-
-const mapDispatchToProps =	(dispatch: Dispatch): Pick<DescriptionComponent.Props, 'actions'> => ({
-	actions: bindActionCreators(DescriptionActions, dispatch)
-});
-
-const WorkConnect = connect(mapStateToProps, mapDispatchToProps)(DescriptionComponent);
-export { WorkConnect as WorkDescriptionPage };

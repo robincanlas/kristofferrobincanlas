@@ -1,10 +1,7 @@
 import * as React from 'react';
 import * as style from './style.css';
 import { Container } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
-import { PhotoActions } from 'app/store/photography/actions';
-import { PhotoState } from 'app/store/photography/state';
+import { useSelector } from 'react-redux';
 import { RootState } from 'app/store';
 import { Models } from 'app/models';
 import { Loader, Photo } from 'app/components';
@@ -12,11 +9,6 @@ import { Modal } from 'semantic-ui-react';
 import { ProgressiveImage } from 'app/components';
 
 export namespace _PhotoPage {
-	export interface Props {
-		photography: PhotoState;
-		photoActions: PhotoActions;
-	}
-
 	export interface InitialModalData {
 		open: boolean;
 		photo: Models.Photo | null;
@@ -28,19 +20,20 @@ const initialModalData: _PhotoPage.InitialModalData = {
 	photo: null
 };
 
-const _PhotoPage: React.FC<_PhotoPage.Props> = (props: _PhotoPage.Props) => {
+export const PhotoPage: React.FC = () => {
 	let limit: number = 20;
 	const [pageNumber, setPageNumber] = React.useState<number>(1);
 	const [photos, setPhotos] = React.useState<Models.Photo[]>([]);
 	const [maxPageNumber, setMaxPageNumber] = React.useState<number>(0);
 	const [loading, setLoading] = React.useState<boolean>(true);
 	const [modalData, setModalData] = React.useState<_PhotoPage.InitialModalData>(initialModalData);
+  const photography = useSelector((state: RootState) => state.photography);
 
 	const watcher: React.MutableRefObject<IntersectionObserver | undefined> = React.useRef();	
 	
 	React.useEffect(() => {
-		setMaxPageNumber(Math.round(props.photography.photos.length / limit));
-	}, [props.photography.photos]);
+		setMaxPageNumber(Math.round(photography.photos.length / limit));
+	}, [photography.photos]);
 
 	const lastPhotoRef: (node: any) => void = React.useCallback(node => {
 		if (loading) return;
@@ -55,15 +48,15 @@ const _PhotoPage: React.FC<_PhotoPage.Props> = (props: _PhotoPage.Props) => {
 		if (node) {
 			watcher.current.observe(node);
 		}
-	}, [photos, props.photography.photos, pageNumber, maxPageNumber, loading]);
+	}, [photos, photography.photos, pageNumber, maxPageNumber, loading]);
 
 	const getPhotos = () => {
 		const newPhotos: Models.Photo[] = [];
-		for (let i = photos.length; i < props.photography.photos.length; i++) {
+		for (let i = photos.length; i < photography.photos.length; i++) {
 			if (limit * pageNumber === i) {
 				break;
 			}
-			newPhotos.push(props.photography.photos[i]);
+			newPhotos.push(photography.photos[i]);
 		}
 		setPhotos((oldPhotos) => oldPhotos.concat(newPhotos));
 	};
@@ -124,10 +117,10 @@ const _PhotoPage: React.FC<_PhotoPage.Props> = (props: _PhotoPage.Props) => {
 	React.useEffect(() => {
 		setLoading(true);
 		getPhotos();
-	}, [props.photography.photos, pageNumber]);
+	}, [photography.photos, pageNumber]);
 
 	const render = (): JSX.Element => {
-		if (props.photography.isLoading) {
+		if (photography.isLoading) {
 			return <Loader />;
 		}
 
@@ -152,14 +145,3 @@ const _PhotoPage: React.FC<_PhotoPage.Props> = (props: _PhotoPage.Props) => {
 
 	return render();
 };
-
-export const PhotoPage: React.FC<_PhotoPage.Props> = connect(
-	(state: RootState, ownProps): Pick<_PhotoPage.Props, 'photography'> => {
-		return {
-			photography: state.photography
-		};
-	},
-	(dispatch: Dispatch): Pick<_PhotoPage.Props, 'photoActions'> => ({
-		photoActions: bindActionCreators(PhotoActions, dispatch) 
-	})
-)(_PhotoPage);
