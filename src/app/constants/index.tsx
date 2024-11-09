@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Models } from 'app/models';
-import { CreateJS, CSS, HTML5, Javascript, ReactJS, Redux, Typescript, Github, Heroku, SemanticUI, AngularJS, NodeJS, AzureDevOps, MongoDb } from 'app/components/SVGIcons';
+import { CreateJS, CSS, HTML5, Javascript, ReactJS, Redux, Typescript, Github, Heroku, SemanticUI, AngularJS, NodeJS, AzureDevOps, MongoDb, Openlayers } from 'app/components/SVGIcons';
 
 export const assetsPath: string =  '../../assets';
 export interface Icon { [key: string]: JSX.Element; }
@@ -39,6 +39,7 @@ export const skills: Models.Skill[] = [
 	{ name: 'github', title: 'Github' },
 	{ name: 'azuredevops', title: 'Azure DevOps' },
 	{ name: 'nodejs', title: 'NodeJS' },
+	{ name: 'openlayers', title: 'Openlayer' },
 ];
 
 export const svgIcons: Icon  = {
@@ -56,6 +57,7 @@ export const svgIcons: Icon  = {
 	'nodejs': <NodeJS />,
   'azuredevops': <AzureDevOps />,
   'mongodb': <MongoDb />,
+  'openlayers': <Openlayers />
 };
 
 export enum ActionTypes {
