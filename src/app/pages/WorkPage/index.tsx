@@ -3,7 +3,7 @@ import style from './style.css';
 import { Container, Header, Icon } from 'semantic-ui-react';
 import {  useSelector } from 'react-redux';
 import { RootState } from 'app/store';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Models } from 'app/models';
 import { ProgressiveImage, Loader } from 'app/components';
 import { cloudinaryUrl, cloudinarySizes } from 'app/constants';
