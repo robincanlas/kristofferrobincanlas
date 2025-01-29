@@ -1,7 +1,7 @@
 {
   "name": "kristoffer-robin-canlas",
   "homepage": "https://robincanlas.github.io",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Portfolio Webapp",
   "main": "index.js",
   "scripts": {
