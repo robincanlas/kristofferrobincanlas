@@ -3,7 +3,6 @@ const sourcePath = path.join(__dirname, '../src');
 
 // plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   context: sourcePath,
@@ -25,7 +24,6 @@ module.exports = {
     }
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: 'assets/index.html',
       minify: {
