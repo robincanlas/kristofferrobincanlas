@@ -7,7 +7,6 @@ const outPath = path.join(__dirname, './build');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = (env, option) => {
@@ -36,7 +35,8 @@ module.exports = (env, option) => {
       publicPath: isProduction ? '/build/' : '/', //<--- output path for github
       path: outPath,
       filename: isProduction ? '[contenthash].js' : '[hash].js',
-      chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[hash].js'
+      chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[hash].js',
+      clean: true // to replace clean-webpack-plugin
     },
     resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
@@ -164,7 +164,6 @@ module.exports = (env, option) => {
         NODE_ENV: option.mode,
         DEBUG: false
       }),
-      new CleanWebpackPlugin(),
       new MiniCssExtractPlugin({
         filename: 'build/[hash].css',
         disable: !isProduction

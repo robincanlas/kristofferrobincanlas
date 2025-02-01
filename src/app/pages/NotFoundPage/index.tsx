@@ -1,7 +1,7 @@
 import * as React from 'react';
 import style from './style.css';
 import { Container, Header, Button, Message } from 'semantic-ui-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const NotFoundPage: React.FC<{}> = (props: {}) => {
 	const navigate = useNavigate();

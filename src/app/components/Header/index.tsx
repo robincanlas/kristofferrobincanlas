@@ -3,7 +3,7 @@ import style from './style.css';
 import { Menu } from 'semantic-ui-react';
 import { navs } from 'app/constants';
 import { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router';
 import useLightsOff from 'app/hooks/useLightsOff';
 
 export namespace Header {

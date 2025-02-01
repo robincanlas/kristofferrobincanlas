@@ -1,9 +1,8 @@
 import { 
-	createStore, 
 	combineReducers, 
-	applyMiddleware, 
 	Store } from 'redux';
-import thunk from 'redux-thunk';
+import { configureStore as createStore } from '@reduxjs/toolkit';
+// import { thunk } from 'redux-thunk';
 import { PhotoReducer } from './photography/reducers';
 import { PhotoState } from './photography/state';
 import { WorkReducer } from './work/reducers';
@@ -21,7 +20,7 @@ export interface RootState {
 }
 
 export const configureStore = (initialState?: RootState): Store<RootState> => {
-	const middleware = applyMiddleware(thunk); // <-- later check if production
+	// const middleware = applyMiddleware(thunk); // <-- later check if production
 	const rootReducer = combineReducers<RootState>({
 		photography: PhotoReducer as any,
 		work: WorkReducer as any,
@@ -29,7 +28,12 @@ export const configureStore = (initialState?: RootState): Store<RootState> => {
 		information: InformationReducer as any
 	});
 
-	const store = createStore(rootReducer, initialState as RootState, middleware);
+	// const store = createStore(rootReducer, initialState as RootState, middleware);
+	const store = createStore({
+    reducer:rootReducer, 
+    // initialState as RootState, 
+    // middleware: () => new Tuple(middleware)
+  });
 
 	return store;
 };

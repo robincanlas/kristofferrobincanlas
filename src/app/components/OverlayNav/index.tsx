@@ -3,7 +3,7 @@ import style from './style.css';
 import { Header } from 'semantic-ui-react';
 import { navs } from 'app/constants';
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router';
 
 export namespace OverlayNav {
 	export interface Props {

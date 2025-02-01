@@ -12,3 +12,6 @@ dist
 
 # test coverage
 coverage
+
+#vscode
+.vscode

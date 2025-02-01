@@ -1,6 +1,6 @@
 import * as React from 'react';
 import style from './style.css';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router';
 import { Models } from 'app/models';
 import { Header, Icon } from 'semantic-ui-react';
 import { svgIcons, cloudinaryUrl, cloudinarySizes } from 'app/constants';
