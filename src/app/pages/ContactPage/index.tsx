@@ -30,8 +30,11 @@ export const _ContactPage: React.FC<_ContactPage.Props> = ({
 				</Header>
 				<span>
 					<p>
-           I'm available for freelance projects &nbsp;  
+           I'm &nbsp;  
 					</p>
+          <p className={`${information.availableForFreelance ? '' : style.linethru}`}>
+            available for freelance projects &nbsp;
+          </p>
 					<p className={`${information.isEmployed ? style.linethru : ''}`}>
             and interested in full-time positions.
 					</p>
@@ -48,7 +51,7 @@ export const _ContactPage: React.FC<_ContactPage.Props> = ({
 					<span>
 						<Icon size='huge' name='mobile alternate'/>
 						<div className={style.text}>Phone</div>
-						<div className={style.text}>{information.phone}</div>
+						<div className={style.text}>{information.phone || '-'}</div>
 					</span>
 				</span>
 			</span>			

@@ -51,5 +51,6 @@ export namespace Models {
 		isEmployed: boolean;
 		phone: string;
 		email: string;
+    availableForFreelance: boolean;
 	}
 }
