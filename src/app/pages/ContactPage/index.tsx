@@ -33,10 +33,10 @@ export const _ContactPage: React.FC<_ContactPage.Props> = ({
            I'm &nbsp;  
 					</p>
           <p className={`${information.availableForFreelance ? '' : style.linethru}`}>
-            available for freelance projects &nbsp;
+            available for freelance projects and &nbsp;
           </p>
 					<p className={`${information.isEmployed ? style.linethru : ''}`}>
-            and interested in full-time positions.
+            interested in full-time positions.
 					</p>
 				</span>
 				<p>
